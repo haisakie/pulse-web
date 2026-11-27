@@ -1,6 +1,6 @@
 {
  "Schema": 1,
- "Updated": "2026-11-26",
+ "Updated": "2026-11-27",
  "Tips": [
   {
    "Title": "Run your monitor at its full refresh rate, from the graphics card",
@@ -157,14 +157,14 @@
   {
    "Name": "Radeon RX 9070 GRE",
    "Msrp": 549,
-   "Now": 729,
+   "Now": 619,
    "Lowest": 499,
    "Tier": "1440p"
   },
   {
    "Name": "Radeon RX 9070",
    "Msrp": 549,
-   "Now": 898,
+   "Now": 899,
    "Lowest": 494,
    "Tier": "1440p"
   },
@@ -178,19 +178,19 @@
   {
    "Name": "Radeon RX 9070 XT",
    "Msrp": 599,
-   "Now": 999,
+   "Now": 979,
    "Lowest": 599,
    "Tier": "1440p / 4K"
   },
   {
    "Name": "GeForce RTX 5070 Ti",
    "Msrp": 749,
-   "Now": 1400,
+   "Now": 1479,
    "Lowest": 729,
    "Tier": "1440p / 4K"
   }
  ],
- "RamSource": "Capital and Compute RAM tracker, November 26, 2026",
+ "RamSource": "Capital and Compute RAM tracker, November 27, 2026",
  "RamSourceUrl": "https://capitalandcompute.net/memory-prices/",
  "Ram": [
   {
@@ -666,32 +666,22 @@
   },
   {
    "Tag": "RAM",
-   "Hot": false,
-   "Title": "RAM price tracking 2026",
-   "Body": "Check the best prices on DDR5 and DDR4 memory kits of different capacities.",
+   "Hot": true,
+   "Title": "Electronics manufacturers set up memory 'war rooms' to find, lock in DRAM supplies amid worst shortage in history",
+   "Body": "The memory chip shortage is forcing companies to find supplies using non-traditional avenues, such as online listings and the gray market.",
    "SourceName": "Tom's Hardware",
-   "SourceUrl": "https://www.tomshardware.com/gift-guides-seasonal-sales/the-lowest-priced-ram-in-2026-price-tracking-on-ddr5-and-ddr4-memory-of-all-capacities",
-   "Date": "2026-11-25",
+   "SourceUrl": "https://www.tomshardware.com/pc-components/dram/electronics-manufacturers-set-up-memory-war-rooms-to-find-lock-in-dram-supplies-amid-worst-shortage-in-history-employees-scour-ebay-contact-hundreds-of-brokers-and-snap-up-even-small-batches-of-just-5-to-12-units",
+   "Date": "2026-11-26",
    "Auto": true
   },
   {
    "Tag": "Coming",
    "Hot": false,
-   "Title": "7 new Intel Nova Lake-S Core Ultra 4000-series CPUs detailed in new leak",
-   "Body": "A number of new, unannounced Intel Core Ultra 4000-series chips have been detailed in a Nova Lake document, ahead of what is expected to be an official unveiling of the chips at a next-generation desktop chip event in…",
-   "SourceName": "Tom's Hardware",
-   "SourceUrl": "https://www.tomshardware.com/pc-components/cpus/7-new-intel-nova-lake-s-core-ultra-4000-series-cpus-detailed-in-new-leak-lineup-includes-5-5ghz-ultra-9-4970k-bfc-ahead-of-the-expected-february-2027-release",
-   "Date": "2026-11-25",
-   "Auto": true
-  },
-  {
-   "Tag": "RAM",
-   "Hot": true,
-   "Title": "Asus could go back to 8GB of RAM in entry-level and mid-range PCs as memory prices soar",
-   "Body": "Talking to investors at Asus' Q3 2026 earnings call, Hsu said that the company is likely to \"adjust the memory configuration\" in its entry-level and mid-range PCs to 8GB following the latest Windows 11 update, which…",
+   "Title": "Intel Nova Lake-S leak reveals 28-core Core Ultra 9 4970K BFC with 144MB cache, 5.5 GHz boost clock",
+   "Body": "The most powerful chip in the lineup is the Core Ultra 9 4970K BFC, which features 28 cores, including 8 P-cores, 16 E-cores, and 4 LPE-cores.",
    "SourceName": "TechSpot",
-   "SourceUrl": "https://www.techspot.com/news/114674-asus-could-go-back-8gb-ram-entry-level.html",
-   "Date": "2026-11-24",
+   "SourceUrl": "https://www.techspot.com/news/114710-intel-nova-lake-s-leak-reveals-28-core.html",
+   "Date": "2026-11-26",
    "Auto": true
   }
  ],
