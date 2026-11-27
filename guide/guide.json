@@ -1,0 +1,1780 @@
+{
+ "Schema": 1,
+ "Updated": "2026-11-26",
+ "Tips": [
+  {
+   "Title": "Run your monitor at its full refresh rate, from the graphics card",
+   "Body": "A 144 Hz screen left at 60 Hz, or a cable in the motherboard instead of the graphics card, costs more than any tweak can win back.",
+   "Impact": "Huge",
+   "PulsePage": "diagnose",
+   "PulseAction": "Check my PC",
+   "SourceName": null,
+   "SourceUrl": null
+  },
+  {
+   "Title": "Turn on XMP or EXPO in the BIOS",
+   "Body": "Without it, RAM runs at its slow fallback speed (DDR4 3,200, DDR5 4,800). It's one switch and one of the biggest free gains in CPU-heavy games.",
+   "Impact": "High",
+   "PulsePage": "diagnose",
+   "PulseAction": "See BIOS steps",
+   "SourceName": "TechRadar",
+   "SourceUrl": "https://www.techradar.com/computing/gaming-pcs/ram-crisis-getting-you-down-heres-how-to-upgrade-your-gaming-pc-without-going-broke"
+  },
+  {
+   "Title": "Enable Resizable BAR",
+   "Body": "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, over 15% in some games. In the BIOS: CSM off, Above 4G Decoding on, Re-Size BAR on.",
+   "Impact": "Medium",
+   "PulsePage": null,
+   "PulseAction": null,
+   "SourceName": "Club386",
+   "SourceUrl": "https://www.club386.com/resizable-bar-on-or-off/"
+  },
+  {
+   "Title": "Let shaders build, and stop wiping them",
+   "Body": "New games compile shaders the first time an effect appears, causing hitches that fade. Let the pre-compile step finish, raise the driver's shader cache (10 GB or Unlimited), and skip cleaner apps that delete it.",
+   "Impact": "High",
+   "PulsePage": null,
+   "PulseAction": null,
+   "SourceName": "PCGameCheck",
+   "SourceUrl": "https://pcgamecheck.com/blog/why-is-my-game-stuttering-fix"
+  },
+  {
+   "Title": "Use G-SYNC or FreeSync with the right frame cap",
+   "Body": "Variable refresh on, V-Sync on in the driver and off in the game. With Reflex on, the driver caps for you (about 138 FPS at 144 Hz); without it, cap a few FPS under your refresh rate.",
+   "Impact": "High",
+   "PulsePage": "games",
+   "PulseAction": "Open game checklists",
+   "SourceName": "GearGeeks",
+   "SourceUrl": "https://geargeeksgaming.com/latency/gsync-fps-cap/"
+  },
+  {
+   "Title": "Best performance power mode, Game Mode on, background recording off",
+   "Body": "The Windows settings that still measurably help. On laptops, use Best performance only when plugged in.",
+   "Impact": "Medium",
+   "PulsePage": "tweaks",
+   "PulseAction": "Open tweaks",
+   "SourceName": "Frozen Tweaks",
+   "SourceUrl": "https://frozentweaks.com/guides/windows-11-gaming-optimization"
+  },
+  {
+   "Title": "Games on an SSD, and watch the temperatures",
+   "Body": "New games stutter badly on hard drives. Drops that start after 5 to 15 minutes usually mean heat: clean the dust, fix airflow, repaste or undervolt.",
+   "Impact": "Medium",
+   "PulsePage": "diagnose",
+   "PulseAction": "Check my PC",
+   "SourceName": null,
+   "SourceUrl": null
+  },
+  {
+   "Title": "Memory Integrity: test before turning it off",
+   "Body": "Windows turned it on for many PCs with the October 2026 update. On modern CPUs it costs under 2% in 2026 tests; older CPUs lose more. Turning it off removes real protection, so only do it if you measure a difference.",
+   "Impact": "Low",
+   "PulsePage": "measure",
+   "PulseAction": "Measure it",
+   "SourceName": "TechFuelHQ",
+   "SourceUrl": "https://techfuelhq.com/gaming/memory-integrity-on-or-off-2026/"
+  }
+ ],
+ "Skip": [
+  {
+   "Title": "Registry cleaners",
+   "Body": "No measurable effect on modern Windows, and a real chance of breaking installed software."
+  },
+  {
+   "Title": "Turning off the page file",
+   "Body": "Games and Windows expect one. Without it you get crashes when memory runs out, not speed."
+  },
+  {
+   "Title": "Old \"FPS boost\" registry packs",
+   "Body": "Many 2017-era tweaks no longer do anything on Windows 11 24H2 and later."
+  },
+  {
+   "Title": "Forcing MSI mode on every device",
+   "Body": "Modern graphics and network drivers already use it. Forcing it on devices that don't support it can stop Windows from starting."
+  },
+  {
+   "Title": "Turning off fullscreen optimizations",
+   "Body": "On Windows 10 and 11 they give fullscreen speed with fast alt-tab. Only try it for one old game that misbehaves."
+  },
+  {
+   "Title": "RAM cleaners and 'game booster' apps",
+   "Body": "Emptying memory just makes Windows load it again. Free RAM isn't faster RAM."
+  },
+  {
+   "Title": "Changing DNS for lower ping",
+   "Body": "DNS only finds the server's address before you connect. In-game ping doesn't change."
+  },
+  {
+   "Title": "Timer resolution tools",
+   "Body": "Windows 11 already gives games the timer they ask for, and forcing it for everything raises power use."
+  }
+ ],
+ "GpuSource": "Tom's Hardware GPU price tracker, November 2026",
+ "GpuSourceUrl": "https://www.tomshardware.com/pc-components/gpus/lowest-gpu-prices-tracking",
+ "Gpus": [
+  {
+   "Name": "GeForce RTX 5050",
+   "Msrp": 249,
+   "Now": 419,
+   "Lowest": 229,
+   "Tier": "1080p"
+  },
+  {
+   "Name": "GeForce RTX 5060",
+   "Msrp": 299,
+   "Now": 449,
+   "Lowest": 279,
+   "Tier": "1080p"
+  },
+  {
+   "Name": "Radeon RX 9060 XT 8GB",
+   "Msrp": 299,
+   "Now": 539,
+   "Lowest": 259,
+   "Tier": "1080p"
+  },
+  {
+   "Name": "GeForce RTX 5060 Ti 8GB",
+   "Msrp": 379,
+   "Now": 499,
+   "Lowest": 319,
+   "Tier": "1080p"
+  },
+  {
+   "Name": "Radeon RX 9060 XT 16GB",
+   "Msrp": 349,
+   "Now": 719,
+   "Lowest": 349,
+   "Tier": "1080p / 1440p"
+  },
+  {
+   "Name": "GeForce RTX 5060 Ti 16GB",
+   "Msrp": 429,
+   "Now": 799,
+   "Lowest": 379,
+   "Tier": "1080p / 1440p"
+  },
+  {
+   "Name": "Radeon RX 9070 GRE",
+   "Msrp": 549,
+   "Now": 729,
+   "Lowest": 499,
+   "Tier": "1440p"
+  },
+  {
+   "Name": "Radeon RX 9070",
+   "Msrp": 549,
+   "Now": 898,
+   "Lowest": 494,
+   "Tier": "1440p"
+  },
+  {
+   "Name": "GeForce RTX 5070",
+   "Msrp": 549,
+   "Now": 899,
+   "Lowest": 479,
+   "Tier": "1440p"
+  },
+  {
+   "Name": "Radeon RX 9070 XT",
+   "Msrp": 599,
+   "Now": 999,
+   "Lowest": 599,
+   "Tier": "1440p / 4K"
+  },
+  {
+   "Name": "GeForce RTX 5070 Ti",
+   "Msrp": 749,
+   "Now": 1400,
+   "Lowest": 729,
+   "Tier": "1440p / 4K"
+  }
+ ],
+ "RamSource": "Capital and Compute RAM tracker, November 26, 2026",
+ "RamSourceUrl": "https://capitalandcompute.net/memory-prices/",
+ "Ram": [
+  {
+   "Kit": "16 GB DDR5 (2×8)",
+   "Now": "$297",
+   "Before": "",
+   "Ddr5": true
+  },
+  {
+   "Kit": "32 GB DDR5 (2×16)",
+   "Now": "$429 – $600",
+   "Before": "about $95",
+   "Ddr5": true
+  },
+  {
+   "Kit": "64 GB DDR5 (2×32)",
+   "Now": "$1,360",
+   "Before": "about $222",
+   "Ddr5": true
+  },
+  {
+   "Kit": "16 GB DDR4 (2×8)",
+   "Now": "$130",
+   "Before": "",
+   "Ddr5": false
+  },
+  {
+   "Kit": "32 GB DDR4 (2×16)",
+   "Now": "$129 – $257",
+   "Before": "",
+   "Ddr5": false
+  },
+  {
+   "Kit": "64 GB DDR4 (2×32)",
+   "Now": "$552",
+   "Before": "",
+   "Ddr5": false
+  }
+ ],
+ "RamHistorySource": "WhereIsMyRAM via Capital and Compute",
+ "RamHistory": [
+  {
+   "Date": "2025-04-04",
+   "Cheapest": 59,
+   "Average": 125
+  },
+  {
+   "Date": "2025-06-15",
+   "Cheapest": 50,
+   "Average": 127
+  },
+  {
+   "Date": "2025-06-19",
+   "Cheapest": 50,
+   "Average": 127
+  },
+  {
+   "Date": "2025-07-03",
+   "Cheapest": 62,
+   "Average": 130
+  },
+  {
+   "Date": "2025-07-08",
+   "Cheapest": 62,
+   "Average": 130
+  },
+  {
+   "Date": "2025-09-13",
+   "Cheapest": 63,
+   "Average": 130
+  },
+  {
+   "Date": "2025-09-22",
+   "Cheapest": 63,
+   "Average": 132
+  },
+  {
+   "Date": "2025-11-24",
+   "Cheapest": 124,
+   "Average": 345
+  },
+  {
+   "Date": "2025-12-07",
+   "Cheapest": 126,
+   "Average": 422
+  },
+  {
+   "Date": "2026-02-04",
+   "Cheapest": 150,
+   "Average": 569
+  },
+  {
+   "Date": "2026-02-21",
+   "Cheapest": 150,
+   "Average": 558
+  },
+  {
+   "Date": "2026-04-17",
+   "Cheapest": 150,
+   "Average": 539
+  },
+  {
+   "Date": "2026-05-08",
+   "Cheapest": 150,
+   "Average": 521
+  },
+  {
+   "Date": "2026-06-28",
+   "Cheapest": 375,
+   "Average": 566
+  },
+  {
+   "Date": "2026-07-23",
+   "Cheapest": 390,
+   "Average": 561
+  },
+  {
+   "Date": "2026-09-08",
+   "Cheapest": 396,
+   "Average": 574
+  },
+  {
+   "Date": "2026-10-07",
+   "Cheapest": 396,
+   "Average": 595
+  },
+  {
+   "Date": "2026-10-16",
+   "Cheapest": 420,
+   "Average": 605
+  },
+  {
+   "Date": "2026-10-20",
+   "Cheapest": 420,
+   "Average": 608
+  },
+  {
+   "Date": "2026-10-24",
+   "Cheapest": 420,
+   "Average": 607
+  },
+  {
+   "Date": "2026-10-28",
+   "Cheapest": 420,
+   "Average": 608
+  },
+  {
+   "Date": "2026-10-30",
+   "Cheapest": 420,
+   "Average": 616
+  },
+  {
+   "Date": "2026-10-31",
+   "Cheapest": 429,
+   "Average": 617
+  },
+  {
+   "Date": "2026-11-01",
+   "Cheapest": 429,
+   "Average": 617
+  },
+  {
+   "Date": "2026-11-03",
+   "Cheapest": 429,
+   "Average": 617
+  },
+  {
+   "Date": "2026-11-07",
+   "Cheapest": 429,
+   "Average": 620
+  },
+  {
+   "Date": "2026-11-11",
+   "Cheapest": 429,
+   "Average": 624
+  },
+  {
+   "Date": "2026-11-15",
+   "Cheapest": 429,
+   "Average": 622
+  },
+  {
+   "Date": "2026-11-16",
+   "Cheapest": 429,
+   "Average": 622
+  }
+ ],
+ "Gear": [
+  {
+   "Title": "Processors",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Best for gaming",
+     "Name": "AMD Ryzen 7 9800X3D",
+     "Why": "Still the one to buy for games.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/best-cpu-for-gaming/"
+    },
+    {
+     "Label": "Fastest",
+     "Name": "AMD Ryzen 7 9850X3D",
+     "Why": "About 3% faster in games, with about 30% more power draw.",
+     "SourceName": "DropReference",
+     "SourceUrl": "https://dropreference.com/en/blog/guide/best-gaming-processor"
+    },
+    {
+     "Label": "Gaming value",
+     "Name": "AMD Ryzen 5 7600X3D",
+     "Why": "Tom's Hardware's best-value gaming CPU, at about $250.",
+     "SourceName": "Tom's Hardware",
+     "SourceUrl": "https://www.tomshardware.com/reviews/best-gaming-cpu,2466.html"
+    },
+    {
+     "Label": "Best Intel",
+     "Name": "Core Ultra 5 250K Plus",
+     "Why": "Strong in games and multitasking for about $200 to $220. Tom's Hardware and PC Gamer both pick it.",
+     "SourceName": "Tom's Hardware",
+     "SourceUrl": "https://www.tomshardware.com/reviews/best-gaming-cpu,2466.html"
+    }
+   ]
+  },
+  {
+   "Title": "Graphics cards",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Budget",
+     "Name": "Radeon RX 9060 XT 8GB / Arc B580",
+     "Why": "The sub-$300 picks at launch prices.",
+     "SourceName": "TechSpot",
+     "SourceUrl": "https://www.techspot.com/bestof/gpu-25-26/"
+    },
+    {
+     "Label": "Value",
+     "Name": "Radeon RX 9060 XT 16GB",
+     "Why": "Best value, with 16 GB of video memory.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/hardware/graphics-cards/graphics-card-price-watch-deals/"
+    },
+    {
+     "Label": "1440p",
+     "Name": "Radeon RX 9070 / GeForce RTX 5070",
+     "Why": "The 1440p sweet spot for most players.",
+     "SourceName": "TechSpot",
+     "SourceUrl": "https://www.techspot.com/bestof/gpu-25-26/"
+    },
+    {
+     "Label": "High end",
+     "Name": "GeForce RTX 5070 Ti",
+     "Why": "About 9% behind the RTX 5080 at 1440p, for less.",
+     "SourceName": "VerdictBits",
+     "SourceUrl": "https://verdictbits.com/reviews/best-gpus-2026/"
+    }
+   ]
+  },
+  {
+   "Title": "Monitors",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Best 1440p",
+     "Name": "ASUS ROG Swift OLED PG27AQWP-W",
+     "Why": "540 Hz OLED, the top pick of OLED specialists.",
+     "SourceName": "TFTCentral",
+     "SourceUrl": "https://tftcentral.co.uk/recommendations/the-best-oled-gaming-monitors-to-buy-in-2026"
+    },
+    {
+     "Label": "500 Hz OLED",
+     "Name": "MSI MPG 271QR X50 / MAG 272QP X50",
+     "Why": "QD-OLED at 500 Hz for less.",
+     "SourceName": "Display Ninja",
+     "SourceUrl": "https://www.displayninja.com/best-gaming-monitor/"
+    },
+    {
+     "Label": "Budget OLED",
+     "Name": "Alienware AW2726DM",
+     "Why": "The cheapest 1440p OLED, around $350.",
+     "SourceName": "TechSpot",
+     "SourceUrl": "https://www.techspot.com/bestof/oled-monitors-26/"
+    }
+   ]
+  },
+  {
+   "Title": "Mice",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Best overall",
+     "Name": "Logitech G Pro X2 Superstrike",
+     "Why": "Haptic buttons with adjustable actuation and rapid trigger.",
+     "SourceName": "Tom's Guide",
+     "SourceUrl": "https://www.tomsguide.com/round-up/best-gaming-mice"
+    },
+    {
+     "Label": "Ergonomic",
+     "Name": "Razer DeathAdder V4 Pro",
+     "Why": "Top pick for right-handed shapes.",
+     "SourceName": "GamesRadar+",
+     "SourceUrl": "https://www.gamesradar.com/best-gaming-mouse-to-buy/"
+    },
+    {
+     "Label": "Lightweight",
+     "Name": "Corsair Sabre V2 Pro Ultralight",
+     "Why": "36 g for $99.99.",
+     "SourceName": "GamesRadar+",
+     "SourceUrl": "https://www.gamesradar.com/best-gaming-mouse-to-buy/"
+    },
+    {
+     "Label": "Budget wireless",
+     "Name": "Razer Viper V3 HyperSpeed",
+     "Why": "Great sensor without the flagship price.",
+     "SourceName": "Trusted Reviews",
+     "SourceUrl": "https://www.trustedreviews.com/best/best-gaming-mouse-3515423"
+    }
+   ]
+  },
+  {
+   "Title": "Keyboards",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Best overall",
+     "Name": "Wooting 80HE",
+     "Why": "Hall effect switches and the best rapid trigger software.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/best-gaming-keyboard/"
+    },
+    {
+     "Label": "Wireless",
+     "Name": "Keychron K2 HE",
+     "Why": "Rapid trigger without the cable.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/best-gaming-keyboard/"
+    },
+    {
+     "Label": "Budget",
+     "Name": "Gamakay × NaughShark NS68",
+     "Why": "Hall effect, 8K polling and rapid trigger for about $44.",
+     "SourceName": "Keyboard Tester",
+     "SourceUrl": "https://keyboardtester.click/blog/best-mechanical-keyboards-for-gaming-2026.php"
+    }
+   ]
+  },
+  {
+   "Title": "Headsets and mics",
+   "Glyph": "",
+   "Picks": [
+    {
+     "Label": "Best sound",
+     "Name": "Audeze Maxwell 2",
+     "Why": "The best PC gaming headset in lab tests.",
+     "SourceName": "RTINGS",
+     "SourceUrl": "https://www.rtings.com/headphones/reviews/best/pc-gaming-headsets"
+    },
+    {
+     "Label": "Best overall",
+     "Name": "SteelSeries Arctis Nova Pro Omni",
+     "Why": "Top pick at several outlets.",
+     "SourceName": "GamesRadar+",
+     "SourceUrl": "https://www.gamesradar.com/best-gaming-headsets/"
+    },
+    {
+     "Label": "Wireless value",
+     "Name": "Razer BlackShark V3",
+     "Why": "Great sound, low latency, fair price.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/best-gaming-headset/"
+    },
+    {
+     "Label": "Microphone",
+     "Name": "Shure MV6",
+     "Why": "The best desk mic for gaming.",
+     "SourceName": "PC Gamer",
+     "SourceUrl": "https://www.pcgamer.com/best-microphone-gaming-streaming/"
+    }
+   ]
+  }
+ ],
+ "Builders": [
+  {
+   "Name": "Corsair Vengeance",
+   "GoodFor": "Best build quality",
+   "Example": "Vengeance a7500: Ryzen 7 9800X3D + RTX 5070 Ti, 2-year warranty, about $3,000 now",
+   "Watch": "Premium price",
+   "SourceName": "Tom's Hardware",
+   "SourceUrl": "https://www.tomshardware.com/best-picks/best-gaming-pcs"
+  },
+  {
+   "Name": "Lenovo Legion Tower",
+   "GoodFor": "Best all-round value, quiet",
+   "Example": "Ryzen 7 7800X3D + RTX 5070, 32 GB, about $1,400 – $1,530",
+   "Watch": "Some parts are Lenovo's own",
+   "SourceName": "PCGameCheck",
+   "SourceUrl": "https://pcgamecheck.com/blog/best-prebuilt-gaming-pc-brands-2026-us"
+  },
+  {
+   "Name": "HP OMEN",
+   "GoodFor": "Service network and cooling",
+   "Example": "OMEN 35L / 45L with 9800X3D options",
+   "Watch": "Check which parts are standard",
+   "SourceName": "Your Tech Reviews",
+   "SourceUrl": "https://yourtechreviews.com/best-prebuilt-gaming-pc-brands/"
+  },
+  {
+   "Name": "Maingear",
+   "GoodFor": "Most configurable",
+   "Example": "MG-1, pick every part",
+   "Watch": "Costs more than mass-market brands",
+   "SourceName": "Tom's Hardware",
+   "SourceUrl": "https://www.tomshardware.com/best-picks/best-gaming-pcs"
+  },
+  {
+   "Name": "NZXT",
+   "GoodFor": "Clean looks, easy upgrades",
+   "Example": "BLD and Player series, 2-year warranty",
+   "Watch": "Value varies by config",
+   "SourceName": "Newegg Insider",
+   "SourceUrl": "https://www.newegg.com/insider/best-prebuilt-gaming-desktops-in-2026"
+  },
+  {
+   "Name": "Skytech / iBUYPOWER / CyberPowerPC",
+   "GoodFor": "Budget and standard parts",
+   "Example": "Standard boards, PSUs and cases you can upgrade",
+   "Watch": "Read the exact parts list",
+   "SourceName": "WePC",
+   "SourceUrl": "https://www.wepc.com/prebuilt/best-prebuilt-gaming-pc/"
+  }
+ ],
+ "PrebuiltChecks": [
+  "Two RAM sticks (2×16 GB), not one: a single stick halves memory bandwidth.",
+  "A named power supply brand with an 80 Plus Gold rating.",
+  "Standard motherboard and case sizes, so you can upgrade later.",
+  "The exact graphics card model, not \"RTX 50 series\".",
+  "At least a 1-year warranty with parts and labor."
+ ],
+ "News": [
+  {
+   "Tag": "RAM",
+   "Hot": true,
+   "Title": "RAM costs four to seven times more than a year ago",
+   "Body": "AI data centers are buying most of the world's memory. A 32 GB DDR5 kit went from about $59 in April 2025 to $429 on November 3, 2026.",
+   "SourceName": "Capital and Compute",
+   "SourceUrl": "https://capitalandcompute.net/memory-prices/history/",
+   "Date": "2026-11-03"
+  },
+  {
+   "Tag": "RAM",
+   "Hot": true,
+   "Title": "The worst may still be ahead",
+   "Body": "Team Group's CEO expects no price drop next year. Its DDR5 chips cost about 5.5 times more than a year ago, and supply may not catch up before late 2028.",
+   "SourceName": "Hardware Busters",
+   "SourceUrl": "https://hwbusters.com/news/team-group-posts-a-record-quarter-then-warns-the-memory-shortage-wont-ease-before-2028/",
+   "Date": "2026-11-04"
+  },
+  {
+   "Tag": "Storage",
+   "Hot": false,
+   "Title": "SSD prices are climbing too",
+   "Body": "Some SSD contract prices are up 303% in a year, with another 15 to 20% expected this quarter.",
+   "SourceName": "Notebookcheck",
+   "SourceUrl": "https://www.notebookcheck.net/SSD-prices-explode-by-303-in-a-year-as-AI-fuels-NAND-flash-shortage.1433261.0.html",
+   "Date": "2026-11-07"
+  },
+  {
+   "Tag": "GPU",
+   "Hot": false,
+   "Title": "Radeon cards may get scarcer until January",
+   "Body": "An unconfirmed report from China says AMD's gaming GPU supply is down 20 to 50% since October, with shortages lasting until January 2027. The RX 9070 XT's lowest UK price has already risen to £799.",
+   "SourceName": "Club386",
+   "SourceUrl": "https://www.club386.com/amd-gpu-supply-falls-by-up-to-50-percent-rumour/",
+   "Date": "2026-11-12"
+  },
+  {
+   "Tag": "RAM",
+   "Hot": false,
+   "Title": "RAM price tracking 2026",
+   "Body": "Check the best prices on DDR5 and DDR4 memory kits of different capacities.",
+   "SourceName": "Tom's Hardware",
+   "SourceUrl": "https://www.tomshardware.com/gift-guides-seasonal-sales/the-lowest-priced-ram-in-2026-price-tracking-on-ddr5-and-ddr4-memory-of-all-capacities",
+   "Date": "2026-11-25",
+   "Auto": true
+  },
+  {
+   "Tag": "Coming",
+   "Hot": false,
+   "Title": "7 new Intel Nova Lake-S Core Ultra 4000-series CPUs detailed in new leak",
+   "Body": "A number of new, unannounced Intel Core Ultra 4000-series chips have been detailed in a Nova Lake document, ahead of what is expected to be an official unveiling of the chips at a next-generation desktop chip event in…",
+   "SourceName": "Tom's Hardware",
+   "SourceUrl": "https://www.tomshardware.com/pc-components/cpus/7-new-intel-nova-lake-s-core-ultra-4000-series-cpus-detailed-in-new-leak-lineup-includes-5-5ghz-ultra-9-4970k-bfc-ahead-of-the-expected-february-2027-release",
+   "Date": "2026-11-25",
+   "Auto": true
+  },
+  {
+   "Tag": "RAM",
+   "Hot": true,
+   "Title": "Asus could go back to 8GB of RAM in entry-level and mid-range PCs as memory prices soar",
+   "Body": "Talking to investors at Asus' Q3 2026 earnings call, Hsu said that the company is likely to \"adjust the memory configuration\" in its entry-level and mid-range PCs to 8GB following the latest Windows 11 update, which…",
+   "SourceName": "TechSpot",
+   "SourceUrl": "https://www.techspot.com/news/114674-asus-could-go-back-8gb-ram-entry-level.html",
+   "Date": "2026-11-24",
+   "Auto": true
+  }
+ ],
+ "UpgradeTips": [
+  "Get the free speed first: XMP/EXPO, Resizable BAR and your monitor's refresh rate.",
+  "Buy RAM as a matched pair. DDR4 and DDR5 don't mix, and adding two more sticks can slow a PC down.",
+  "Used RAM and graphics cards can be cheaper than new; buy SSDs new, because they wear out.",
+  "A prebuilt PC can be the better deal right now: their prices have risen less than the parts.",
+  "Upgrade what isn't in short supply: CPUs, monitors, mice and keyboards."
+ ],
+ "Tr": {
+  "es": {
+   "36 g for $99.99.": "36 g por $99.99.",
+   "500 Hz OLED": "OLED de 500 Hz",
+   "540 Hz OLED, the top pick of OLED specialists.": "OLED de 540 Hz, la favorita de los especialistas en OLED.",
+   "A 144 Hz screen left at 60 Hz, or a cable in the motherboard instead of the graphics card, costs more than any tweak can win back.": "Una pantalla de 144 Hz a 60 Hz, o un cable en la placa base en vez de la tarjeta gráfica, cuesta más de lo que cualquier ajuste puede recuperar.",
+   "A named power supply brand with an 80 Plus Gold rating.": "Una fuente de marca conocida con certificación 80 Plus Gold.",
+   "A prebuilt PC can be the better deal right now: their prices have risen less than the parts.": "Un PC prearmado puede salir mejor ahora: su precio ha subido menos que el de las piezas.",
+   "AI data centers are buying most of the world's memory. A 32 GB DDR5 kit went from about $59 in April 2025 to $429 on November 3, 2026.": "Los centros de datos de IA compran casi toda la memoria del mundo. Un kit DDR5 de 32 GB pasó de unos $59 en abril de 2025 a $429 el 3 de noviembre de 2026.",
+   "About 3% faster in games, with about 30% more power draw.": "Un 3% más rápido en juegos, con un 30% más de consumo.",
+   "About 9% behind the RTX 5080 at 1440p, for less.": "Un 9% por detrás de la RTX 5080 en 1440p, por menos.",
+   "At least a 1-year warranty with parts and labor.": "Al menos 1 año de garantía con piezas y mano de obra.",
+   "BLD and Player series, 2-year warranty": "Series BLD y Player, 2 años de garantía",
+   "Best 1440p": "Mejor 1440p",
+   "Best Intel": "Mejor Intel",
+   "Best all-round value, quiet": "Mejor calidad-precio general, silencioso",
+   "Best build quality": "Mejor calidad de montaje",
+   "Best for gaming": "Mejor para jugar",
+   "Best overall": "Mejor en general",
+   "Best performance power mode, Game Mode on, background recording off": "Modo de energía Mejor rendimiento, Modo Juego activado, grabación en segundo plano desactivada",
+   "Best sound": "Mejor sonido",
+   "Best value, with 16 GB of video memory.": "La mejor calidad-precio, con 16 GB de memoria de vídeo.",
+   "Budget": "Económico",
+   "Budget OLED": "OLED económico",
+   "Budget and standard parts": "Económico y con piezas estándar",
+   "Budget wireless": "Inalámbrico económico",
+   "Buy RAM as a matched pair. DDR4 and DDR5 don't mix, and adding two more sticks can slow a PC down.": "Compra la RAM en pareja igual. DDR4 y DDR5 no se mezclan, y añadir dos módulos más puede hacer el PC más lento.",
+   "Check my PC": "Revisar mi PC",
+   "Check which parts are standard": "Revisa qué piezas son estándar",
+   "Clean looks, easy upgrades": "Diseño limpio, fácil de mejorar",
+   "Costs more than mass-market brands": "Cuesta más que las marcas masivas",
+   "Enable Resizable BAR": "Activa Resizable BAR",
+   "Ergonomic": "Ergonómico",
+   "Fastest": "El más rápido",
+   "GPU": "GPU",
+   "Games and Windows expect one. Without it you get crashes when memory runs out, not speed.": "Los juegos y Windows esperan que exista. Sin él tienes cierres cuando se acaba la memoria, no velocidad.",
+   "Games on an SSD, and watch the temperatures": "Juegos en un SSD, y vigila las temperaturas",
+   "Gaming value": "Mejor valor para jugar",
+   "Get the free speed first: XMP/EXPO, Resizable BAR and your monitor's refresh rate.": "Primero la velocidad gratis: XMP/EXPO, Resizable BAR y la frecuencia del monitor.",
+   "Graphics cards": "Tarjetas gráficas",
+   "Great sensor without the flagship price.": "Gran sensor sin precio de gama alta.",
+   "Great sound, low latency, fair price.": "Gran sonido, baja latencia, precio justo.",
+   "Hall effect switches and the best rapid trigger software.": "Interruptores Hall effect y el mejor software de rapid trigger.",
+   "Hall effect, 8K polling and rapid trigger for about $44.": "Hall effect, sondeo de 8K y rapid trigger por unos $44.",
+   "Haptic buttons with adjustable actuation and rapid trigger.": "Botones hápticos con activación ajustable y rapid trigger.",
+   "Headsets and mics": "Auriculares y micrófonos",
+   "High": "Alta",
+   "High end": "Gama alta",
+   "Huge": "enorme",
+   "Keyboards": "Teclados",
+   "Let shaders build, and stop wiping them": "Deja que se compilen los shaders y no los borres",
+   "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, over 15% in some games. In the BIOS: CSM off, Above 4G Decoding on, Re-Size BAR on.": "Deja que la CPU acceda a toda la memoria de la tarjeta gráfica a la vez. Suele dar unos pocos por ciento, más del 15% en algunos juegos. En la BIOS: CSM desactivado, Above 4G Decoding activado, Re-Size BAR activado.",
+   "Lightweight": "Ultraligero",
+   "Low": "Baja",
+   "MG-1, pick every part": "MG-1, eliges cada pieza",
+   "Many 2017-era tweaks no longer do anything on Windows 11 24H2 and later.": "Muchos ajustes de 2017 ya no hacen nada en Windows 11 24H2 y posteriores.",
+   "Measure it": "Medirlo",
+   "Medium": "Media",
+   "Memory Integrity: test before turning it off": "Integridad de memoria: prueba antes de desactivarla",
+   "Mice": "Ratones",
+   "Microphone": "Micrófono",
+   "Monitors": "Monitores",
+   "Most configurable": "El más configurable",
+   "New games compile shaders the first time an effect appears, causing hitches that fade. Let the pre-compile step finish, raise the driver's shader cache (10 GB or Unlimited), and skip cleaner apps that delete it.": "Los juegos nuevos compilan shaders la primera vez que aparece un efecto, con tirones que luego desaparecen. Deja terminar la precompilación, sube la caché de shaders del driver (10 GB o Ilimitada) y evita apps de limpieza que la borran.",
+   "New games stutter badly on hard drives. Drops that start after 5 to 15 minutes usually mean heat: clean the dust, fix airflow, repaste or undervolt.": "Los juegos nuevos dan muchos tirones en discos duros. Caídas que empiezan a los 5 a 15 minutos suelen ser calor: limpia el polvo, mejora el flujo de aire, cambia la pasta o haz undervolt.",
+   "No measurable effect on modern Windows, and a real chance of breaking installed software.": "Ningún efecto medible en Windows moderno, y riesgo real de romper programas instalados.",
+   "OMEN 35L / 45L with 9800X3D options": "OMEN 35L / 45L con opciones 9800X3D",
+   "Old \"FPS boost\" registry packs": "Viejos paquetes de registro \"para más FPS\"",
+   "Open game checklists": "Abrir listas de juegos",
+   "Open tweaks": "Abrir ajustes",
+   "Premium price": "Precio premium",
+   "Processors": "Procesadores",
+   "QD-OLED at 500 Hz for less.": "QD-OLED a 500 Hz por menos.",
+   "RAM": "RAM",
+   "RAM costs four to seven times more than a year ago": "La RAM cuesta de cuatro a siete veces más que hace un año",
+   "Rapid trigger without the cable.": "Rapid trigger sin cable.",
+   "Read the exact parts list": "Lee la lista exacta de piezas",
+   "Registry cleaners": "Limpiadores de registro",
+   "Run your monitor at its full refresh rate, from the graphics card": "Usa el monitor a su frecuencia máxima, conectado a la tarjeta gráfica",
+   "Ryzen 7 7800X3D + RTX 5070, 32 GB, about $1,400 – $1,530": "Ryzen 7 7800X3D + RTX 5070, 32 GB, unos $1,400 – $1,530",
+   "SSD prices are climbing too": "Los SSD también suben",
+   "See BIOS steps": "Ver pasos de BIOS",
+   "Service network and cooling": "Red de servicio técnico y refrigeración",
+   "Some SSD contract prices are up 303% in a year, with another 15 to 20% expected this quarter.": "Algunos precios de contrato de SSD subieron un 303% en un año, y se espera otro 15 a 20% este trimestre.",
+   "Some parts are Lenovo's own": "Algunas piezas son propias de Lenovo",
+   "Standard boards, PSUs and cases you can upgrade": "Placas, fuentes y cajas estándar que puedes mejorar",
+   "Standard motherboard and case sizes, so you can upgrade later.": "Placa base y caja de tamaño estándar, para poder mejorar después.",
+   "Still the one to buy for games.": "Sigue siendo el que hay que comprar para jugar.",
+   "Storage": "Almacenamiento",
+   "The 1440p sweet spot for most players.": "El punto ideal en 1440p para la mayoría.",
+   "The Windows settings that still measurably help. On laptops, use Best performance only when plugged in.": "Los ajustes de Windows que todavía ayudan de forma medible. En portátiles, usa Mejor rendimiento solo enchufado.",
+   "The best PC gaming headset in lab tests.": "Los mejores auriculares para PC en pruebas de laboratorio.",
+   "The best desk mic for gaming.": "El mejor micrófono de escritorio para jugar.",
+   "The cheapest 1440p OLED, around $350.": "El OLED 1440p más barato, unos $350.",
+   "The exact graphics card model, not \"RTX 50 series\".": "El modelo exacto de tarjeta gráfica, no \"serie RTX 50\".",
+   "The sub-$300 picks at launch prices.": "Las opciones de menos de $300 a precio de salida.",
+   "The worst may still be ahead": "Lo peor podría estar por llegar",
+   "Top pick at several outlets.": "Favorito en varios medios.",
+   "Top pick for right-handed shapes.": "La mejor opción en formas para diestros.",
+   "Turn on XMP or EXPO in the BIOS": "Activa XMP o EXPO en la BIOS",
+   "Turning off the page file": "Desactivar el archivo de paginación",
+   "Two RAM sticks (2×16 GB), not one: a single stick halves memory bandwidth.": "Dos módulos de RAM (2×16 GB), no uno: un solo módulo reduce a la mitad el ancho de banda.",
+   "Upgrade what isn't in short supply: CPUs, monitors, mice and keyboards.": "Mejora lo que no escasea: CPU, monitores, ratones y teclados.",
+   "Use G-SYNC or FreeSync with the right frame cap": "Usa G-SYNC o FreeSync con el límite de FPS correcto",
+   "Used RAM and graphics cards can be cheaper than new; buy SSDs new, because they wear out.": "La RAM y las tarjetas gráficas usadas pueden salir más baratas; compra los SSD nuevos, porque se desgastan.",
+   "Value": "Valor",
+   "Value varies by config": "La calidad-precio varía según la configuración",
+   "Variable refresh on, V-Sync on in the driver and off in the game. With Reflex on, the driver caps for you (about 138 FPS at 144 Hz); without it, cap a few FPS under your refresh rate.": "Frecuencia variable activada, V-Sync activado en el driver y desactivado en el juego. Con Reflex, el driver limita por ti (unos 138 FPS a 144 Hz); sin él, limita unos FPS por debajo de tu frecuencia.",
+   "Windows turned it on for many PCs with the October 2026 update. On modern CPUs it costs under 2% in 2026 tests; older CPUs lose more. Turning it off removes real protection, so only do it if you measure a difference.": "Windows la activó en muchos PC con la actualización de octubre de 2026. En CPU modernas cuesta menos del 2% en pruebas de 2026; las antiguas pierden más. Desactivarla quita protección real, así que hazlo solo si mides una diferencia.",
+   "Wireless": "Inalámbrico",
+   "Wireless value": "Inalámbrico calidad-precio",
+   "Without it, RAM runs at its slow fallback speed (DDR4 3,200, DDR5 4,800). It's one switch and one of the biggest free gains in CPU-heavy games.": "Sin esto, la RAM funciona a su velocidad lenta de reserva (DDR4 3.200, DDR5 4.800). Es un solo interruptor y una de las mayores mejoras gratis en juegos que exigen CPU.",
+   "Plug the monitor into the graphics card, not the motherboard.": "Conecta el monitor a la tarjeta gráfica, no a la placa base.",
+   "NVIDIA Control Panel → Change resolution: pick your monitor's highest refresh rate (144 Hz, 165 Hz, 240 Hz...). Windows often leaves it at 60.": "Panel de control de NVIDIA → Cambiar resolución: elige la frecuencia más alta de tu monitor (144 Hz, 165 Hz, 240 Hz...). Windows a menudo la deja en 60.",
+   "On the same page, set Output dynamic range to Full. Over HDMI it's often Limited, which makes blacks look grey.": "En la misma página, pon Rango dinámico de salida en Completo. Por HDMI suele estar en Limitado, y los negros se ven grises.",
+   "Install drivers from the NVIDIA App or nvidia.com. Update when a game you play needs it or a fix you want is listed; you don't need every release.": "Instala los controladores desde NVIDIA App o nvidia.com. Actualiza cuando un juego tuyo lo necesite o haya un arreglo que te interese; no hace falta cada versión.",
+   "NVIDIA drivers": "Controladores de NVIDIA",
+   "Get the basics right": "Lo básico bien hecho",
+   "Set up G-SYNC: turn it on (for fullscreen, or fullscreen and windowed if you play borderless).": "Configurar G-SYNC: actívalo (para pantalla completa, o completa y en ventana si juegas sin bordes).",
+   "Manage 3D settings → Vertical sync: On. Then turn V-Sync off in every game.": "Administrar configuración 3D → Sincronización vertical: Activada. Después desactiva el V-Sync en cada juego.",
+   "Cap FPS at least 3 below your refresh rate: 141 at 144 Hz, 162 at 165 Hz, 237 at 240 Hz. Use the game's limiter first, otherwise 'Max Frame Rate' in the Control Panel.": "Limita los FPS al menos 3 por debajo de tu frecuencia: 141 a 144 Hz, 162 a 165 Hz, 237 a 240 Hz. Usa primero el limitador del juego, si no, 'Velocidad máxima de fotogramas' en el Panel de control.",
+   "Games with NVIDIA Reflex: turn Reflex on. With G-SYNC and V-Sync on, it caps for you (about 138 FPS at 144 Hz), so you can skip your own cap there.": "Juegos con NVIDIA Reflex: activa Reflex. Con G-SYNC y V-Sync activados, limita por ti (unos 138 FPS a 144 Hz), así que ahí puedes saltarte tu límite.",
+   "Games without Reflex: set Low Latency Mode to On. 'Ultra' also caps automatically with G-SYNC.": "Juegos sin Reflex: pon Modo de baja latencia en Activado. 'Ultra' además limita solo con G-SYNC.",
+   "The G-SYNC recipe": "La receta de G-SYNC",
+   "Blur Busters' tested settings for no tearing with the least input lag. They also work for 'G-SYNC Compatible' FreeSync monitors.": "Los ajustes probados por Blur Busters para no tener cortes con el menor retraso. También sirven para monitores FreeSync 'G-SYNC Compatible'.",
+   "Shader Cache Size: 10 GB or Unlimited, so games don't recompile shaders (and hitch) as often.": "Tamaño de caché de sombreadores: 10 GB o Ilimitado, para que los juegos no recompilen shaders (y den tirones) tan a menudo.",
+   "Power management mode: leave it on Normal. Use 'Prefer maximum performance' for one game only if its clocks drop and it stutters; it raises idle power.": "Modo de administración de energía: déjalo en Normal. Usa 'Preferir rendimiento máximo' solo para un juego si su velocidad baja y da tirones; sube el consumo en reposo.",
+   "Leave the rest at default. Texture filtering, anisotropic and the like make no measurable FPS difference on a modern card.": "Deja el resto por defecto. El filtrado de texturas, anisotrópico y similares no cambian los FPS de forma medible en una tarjeta moderna.",
+   "Other settings worth changing": "Otros ajustes que vale la pena cambiar",
+   "NVIDIA settings for smooth, low-latency games": "Ajustes de NVIDIA para juegos fluidos y con poca latencia",
+   "The NVIDIA App and Control Panel settings that actually matter, and the G-SYNC recipe Blur Busters measured as best.": "Los ajustes de NVIDIA App y del Panel de control que de verdad importan, y la receta de G-SYNC que Blur Busters midió como la mejor.",
+   "Plug the monitor into the graphics card, and set its highest refresh rate in Windows → Settings → Display → Advanced display.": "Conecta el monitor a la tarjeta gráfica y pon su frecuencia más alta en Windows → Configuración → Pantalla → Pantalla avanzada.",
+   "AMD Software → Settings → Display: turn on AMD FreeSync for your monitor.": "AMD Software → Ajustes → Pantalla: activa AMD FreeSync para tu monitor.",
+   "Turn Enhanced Sync off; it can cause stutter with FreeSync.": "Desactiva Enhanced Sync; puede causar tirones con FreeSync.",
+   "Display": "Pantalla",
+   "Use the Default graphics profile, not HYPR-RX: HYPR-RX switches on several features at once, including ones that lower resolution or add generated frames.": "Usa el perfil gráfico Predeterminado, no HYPR-RX: HYPR-RX activa varias funciones a la vez, incluidas algunas que bajan la resolución o añaden fotogramas generados.",
+   "AMD Anti-Lag: on. In games that support Anti-Lag 2, turn it on in the game's own settings.": "AMD Anti-Lag: activado. En juegos compatibles con Anti-Lag 2, actívalo en los ajustes del propio juego.",
+   "Wait for Vertical Refresh: 'Always on' if you want no tearing with FreeSync, then turn V-Sync off in the game.": "Esperar a la actualización vertical: 'Siempre activado' si no quieres cortes con FreeSync, y desactiva el V-Sync en el juego.",
+   "Cap FPS 3 below your refresh rate with the game's limiter, or with Radeon Chill set to the same minimum and maximum.": "Limita los FPS 3 por debajo de tu frecuencia con el limitador del juego, o con Radeon Chill con el mismo mínimo y máximo.",
+   "Radeon Boost: off for competitive games. It lowers the resolution while you move.": "Radeon Boost: desactivado en juegos competitivos. Baja la resolución mientras te mueves.",
+   "Gaming → Graphics": "Juegos → Gráficos",
+   "Get drivers from AMD Software or amd.com. If a game stutters after an update, try the shader cache reset in Graphics → Advanced once.": "Consigue los controladores desde AMD Software o amd.com. Si un juego da tirones tras una actualización, prueba una vez a restablecer la caché de sombreadores en Gráficos → Avanzado.",
+   "AMD drivers": "Controladores de AMD",
+   "Drivers": "Controladores",
+   "AMD Software settings for smooth, low-latency games": "Ajustes de AMD Software para juegos fluidos y con poca latencia",
+   "FreeSync, Anti-Lag, frame caps and what to leave off in AMD Software: Adrenalin Edition.": "FreeSync, Anti-Lag, límites de FPS y qué dejar desactivado en AMD Software: Adrenalin Edition.",
+   "Restart and press Delete (or F2) repeatedly as the PC starts. Or in Windows: Settings → System → Recovery → Advanced startup → Restart now → Troubleshoot → Advanced options → UEFI Firmware Settings.": "Reinicia y pulsa Supr (o F2) varias veces al arrancar. O en Windows: Configuración → Sistema → Recuperación → Inicio avanzado → Reiniciar ahora → Solucionar problemas → Opciones avanzadas → Configuración de firmware UEFI.",
+   "Most boards open in an Easy mode. Press F7 to switch to Advanced mode if you can't find a setting.": "La mayoría de placas abren en modo Fácil. Pulsa F7 para pasar al modo Avanzado si no encuentras un ajuste.",
+   "Get into the BIOS": "Entrar en la BIOS",
+   "ASUS: Ai Tweaker → Ai Overclock Tuner → XMP I (or EXPO). MSI: the A-XMP or EXPO button on the main screen. Gigabyte: Tweaker → Extreme Memory Profile (X.M.P.). ASRock: OC Tweaker → DRAM Profile → XMP or EXPO.": "ASUS: Ai Tweaker → Ai Overclock Tuner → XMP I (o EXPO). MSI: el botón A-XMP o EXPO en la pantalla principal. Gigabyte: Tweaker → Extreme Memory Profile (X.M.P.). ASRock: OC Tweaker → DRAM Profile → XMP o EXPO.",
+   "Save and exit (usually F10). The first start can take a minute or two while the PC trains the memory, especially with DDR5. Don't turn it off.": "Guarda y sal (normalmente F10). El primer arranque puede tardar un minuto o dos mientras el PC ajusta la memoria, sobre todo con DDR5. No lo apagues.",
+   "Check it worked: Task Manager → Performance → Memory → Speed should show your kit's rated speed, for example 6000 MT/s.": "Comprueba que funcionó: Administrador de tareas → Rendimiento → Memoria → Velocidad debería mostrar la velocidad de tu kit, por ejemplo 6000 MT/s.",
+   "Pulse's Diagnose page checks this too.": "La página Diagnosticar de Pulse también lo comprueba.",
+   "Open Diagnose": "Abrir Diagnosticar",
+   "Won't start, or crashes? Clear the CMOS (the button on the back, or the jumper in the manual) and try the second XMP profile or one speed step lower.": "¿No arranca o se cuelga? Borra la CMOS (el botón de atrás, o el puente del manual) y prueba el segundo perfil XMP o un paso de velocidad menos.",
+   "Turn on XMP or EXPO": "Activa XMP o EXPO",
+   "Without it, RAM runs at its slow fallback speed (DDR4 2,133 to 3,200, DDR5 4,800). It's one of the biggest free gains in CPU-heavy games.": "Sin esto, la RAM va a su velocidad lenta de respaldo (DDR4 2.133 a 3.200, DDR5 4.800). Es una de las mejoras gratis más grandes en juegos que tiran de CPU.",
+   "Turn CSM (Compatibility Support Module) off. Windows 11 already boots without it.": "Desactiva CSM (Compatibility Support Module). Windows 11 ya arranca sin él.",
+   "Turn Above 4G Decoding on, then Re-Size BAR Support on (or Auto). It's usually under Advanced → PCI Subsystem Settings.": "Activa Above 4G Decoding y luego Re-Size BAR Support (o Auto). Suele estar en Advanced → PCI Subsystem Settings.",
+   "Check it: NVIDIA Control Panel → System Information → Resizable BAR: Yes. On AMD, AMD Software → Performance shows Smart Access Memory.": "Compruébalo: Panel de control de NVIDIA → Información del sistema → Resizable BAR: Sí. En AMD, AMD Software → Rendimiento muestra Smart Access Memory.",
+   "Turn on Resizable BAR": "Activa Resizable BAR",
+   "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, more in some games. AMD calls it Smart Access Memory.": "Permite que la CPU acceda a toda la memoria de la tarjeta gráfica a la vez. Suele ser un poco por ciento, más en algunos juegos. AMD lo llama Smart Access Memory.",
+   "Update the BIOS only to fix a problem or support a new CPU, and only from your motherboard maker's support page for your exact model.": "Actualiza la BIOS solo para arreglar un problema o admitir una CPU nueva, y solo desde la página de soporte del fabricante de tu placa para tu modelo exacto.",
+   "An update resets XMP/EXPO and Resizable BAR, so turn them back on afterwards.": "Una actualización restablece XMP/EXPO y Resizable BAR, así que vuelve a activarlos después.",
+   "Never turn the PC off during a BIOS update.": "Nunca apagues el PC durante una actualización de BIOS.",
+   "BIOS updates": "Actualizaciones de BIOS",
+   "BIOS: XMP/EXPO and Resizable BAR": "BIOS: XMP/EXPO y Resizable BAR",
+   "The two BIOS switches most gaming PCs are missing, with the menu names for ASUS, MSI, Gigabyte and ASRock boards.": "Los dos interruptores de la BIOS que le faltan a la mayoría de PCs para juegos, con los nombres de menú para placas ASUS, MSI, Gigabyte y ASRock.",
+   "Download the driver you want to install first (from NVIDIA, AMD or Intel) and keep it on the desktop.": "Descarga primero el controlador que quieres instalar (de NVIDIA, AMD o Intel) y déjalo en el escritorio.",
+   "Download Display Driver Uninstaller (DDU) from its official site, Wagnardsoft, and unzip it.": "Descarga Display Driver Uninstaller (DDU) de su web oficial, Wagnardsoft, y descomprímelo.",
+   "Open Wagnardsoft": "Abrir Wagnardsoft",
+   "In Pulse, turn on 'Stop Windows Update replacing your graphics driver' so Windows doesn't sneak its own driver in while you work.": "En Pulse, activa 'Evitar que Windows Update reemplace tu controlador gráfico' para que Windows no meta el suyo mientras trabajas.",
+   "Open Tweaks": "Abrir Ajustes",
+   "Unplug the network cable or turn Wi-Fi off.": "Desconecta el cable de red o apaga el Wi-Fi.",
+   "Prepare": "Prepárate",
+   "Restart into Safe Mode: hold Shift and click Restart → Troubleshoot → Advanced options → Startup Settings → Restart → press 4.": "Reinicia en Modo seguro: mantén Mayús y haz clic en Reiniciar → Solucionar problemas → Opciones avanzadas → Configuración de inicio → Reiniciar → pulsa 4.",
+   "Run DDU, pick GPU and your brand on the right, then 'Clean and restart'.": "Ejecuta DDU, elige GPU y tu marca a la derecha y luego 'Clean and restart'.",
+   "Back in Windows, run the driver you downloaded. On NVIDIA pick Custom → Clean installation if offered.": "De vuelta en Windows, ejecuta el controlador que descargaste. En NVIDIA elige Personalizada → Instalación limpia si aparece.",
+   "Reconnect to the internet, then set your refresh rate and driver settings again (the NVIDIA or AMD settings guide).": "Vuelve a conectarte a internet y pon de nuevo tu frecuencia y los ajustes del controlador (la guía de ajustes de NVIDIA o AMD).",
+   "Remove and reinstall": "Quitar y reinstalar",
+   "Clean graphics driver reinstall with DDU": "Reinstalación limpia del controlador gráfico con DDU",
+   "The fix for crashes, black screens and stutter that started after a driver update, or when switching between NVIDIA and AMD.": "La solución para cierres, pantallas negras y tirones que empezaron tras actualizar el controlador, o al cambiar entre NVIDIA y AMD.",
+   "Spikes the first time you see an effect or a new area, fewer the second time: shader compilation. See the next chapter.": "Picos la primera vez que ves un efecto o una zona nueva, menos la segunda vez: compilación de shaders. Mira el siguiente capítulo.",
+   "Regular spikes every few seconds, even standing still: something in the background. See 'Background apps'.": "Picos regulares cada pocos segundos, incluso quieto: algo en segundo plano. Mira 'Apps en segundo plano'.",
+   "FPS fine at first, then dropping after 10 to 20 minutes: heat. See the cooling guide.": "FPS bien al principio y luego bajando tras 10 a 20 minutos: calor. Mira la guía de refrigeración.",
+   "Hitching in big or detailed areas, with video memory near full in the overlay: VRAM. Lower texture quality one step.": "Tirones en zonas grandes o detalladas, con la memoria de vídeo casi llena en la superposición: VRAM. Baja un paso la calidad de texturas.",
+   "Pulse's Diagnose page checks the common causes for you: refresh rate, RAM speed, power plan, drivers and more.": "La página Diagnosticar de Pulse comprueba las causas habituales por ti: frecuencia, velocidad de RAM, plan de energía, controladores y más.",
+   "Find the kind of stutter": "Identifica el tipo de tirón",
+   "Let the game's 'compiling shaders' step finish before you play, even if it takes minutes.": "Deja que el paso de 'compilando shaders' del juego termine antes de jugar, aunque tarde minutos.",
+   "Raise the driver's shader cache to 10 GB or Unlimited (NVIDIA) and don't let cleaner apps wipe it. Pulse's cleanup never deletes it.": "Sube la caché de shaders del controlador a 10 GB o Ilimitado (NVIDIA) y no dejes que las apps de limpieza la borren. La limpieza de Pulse nunca la borra.",
+   "After a driver update, expect the first session in each game to hitch again while shaders rebuild.": "Tras actualizar el controlador, espera que la primera partida en cada juego vuelva a dar tirones mientras se reconstruyen los shaders.",
+   "Shader compilation": "Compilación de shaders",
+   "Close what you don't need while playing: browser tabs with video, launchers you're not using, RGB and peripheral apps you don't need open.": "Cierra lo que no necesitas al jugar: pestañas del navegador con vídeo, lanzadores que no usas, apps de RGB y periféricos que no hacen falta abiertas.",
+   "Only one overlay and one recorder at a time (Discord, Steam, NVIDIA, Xbox Game Bar, Medal). Each one hooks into the game.": "Solo una superposición y una grabadora a la vez (Discord, Steam, NVIDIA, Xbox Game Bar, Medal). Cada una se engancha al juego.",
+   "Pause big downloads and Windows Update while you play, or use Pulse's tweak that limits update bandwidth.": "Pausa las descargas grandes y Windows Update mientras juegas, o usa el ajuste de Pulse que limita el ancho de banda de las actualizaciones.",
+   "Trim what starts with Windows on Pulse's Startup apps page.": "Recorta lo que arranca con Windows en la página Apps de inicio de Pulse.",
+   "Open Startup apps": "Abrir Apps de inicio",
+   "Background apps": "Apps en segundo plano",
+   "Games on an SSD, with at least 10 to 15% of the drive free.": "Juegos en un SSD, con al menos un 10 a 15% del disco libre.",
+   "RAM in two matching sticks (dual channel), with XMP or EXPO on. One stick halves memory bandwidth.": "RAM en dos módulos iguales (doble canal), con XMP o EXPO activado. Un solo módulo reduce a la mitad el ancho de banda.",
+   "Laptops: plugged in, on the maker's performance mode, with the game running on the dedicated graphics card.": "Portátiles: enchufado, en el modo rendimiento del fabricante, con el juego en la tarjeta gráfica dedicada.",
+   "Cap your FPS a little below what you can hold most of the time. Steady 120 feels smoother than 120 to 200 jumping around.": "Limita los FPS un poco por debajo de lo que mantienes casi siempre. 120 estables se sienten más fluidos que saltar entre 120 y 200.",
+   "Hardware basics": "Lo básico del hardware",
+   "Fix stutter and FPS drops": "Arregla tirones y caídas de FPS",
+   "Work out what kind of stutter you have, then fix the cause: shaders, video memory, background apps, storage, heat or frame pacing.": "Averigua qué tipo de tirón tienes y arregla la causa: shaders, memoria de vídeo, apps en segundo plano, almacenamiento, calor o ritmo de fotogramas.",
+   "Use an Ethernet cable if you can. It removes most lag spikes Wi-Fi causes. Powerline adapters are the next best thing.": "Usa un cable Ethernet si puedes. Quita la mayoría de picos que causa el Wi-Fi. Los adaptadores PLC son la siguiente mejor opción.",
+   "On Wi-Fi: connect on 5 GHz or 6 GHz, not 2.4 GHz, and keep the router in the open, not in a cupboard or behind the TV.": "Con Wi-Fi: conéctate a 5 GHz o 6 GHz, no a 2,4 GHz, y pon el router a la vista, no en un armario ni detrás de la tele.",
+   "Pick the game server or region closest to you. Distance is most of your ping, and no PC setting changes it.": "Elige el servidor o la región del juego más cercana. La distancia es la mayor parte de tu ping, y ningún ajuste del PC la cambia.",
+   "The connection": "La conexión",
+   "Run Waveform's bufferbloat test. A grade of C or worse means your ping jumps whenever the connection is busy.": "Haz la prueba de bufferbloat de Waveform. Una nota C o peor significa que tu ping salta cada vez que la conexión está ocupada.",
+   "Open the test": "Abrir la prueba",
+   "Fix it on the router: turn on Smart Queue, SQM or Adaptive QoS (names vary), set to about 90% of your measured speed.": "Arréglalo en el router: activa Smart Queue, SQM o QoS adaptable (el nombre cambia), puesto a un 90% de tu velocidad medida.",
+   "No such setting on your router? Pause Steam, console and Windows downloads while you play.": "¿Tu router no lo tiene? Pausa las descargas de Steam, consolas y Windows mientras juegas.",
+   "Bufferbloat: lag when someone else downloads": "Bufferbloat: lag cuando otro descarga",
+   "Changing DNS doesn't change in-game ping. DNS only looks up addresses before you connect.": "Cambiar el DNS no cambia el ping en el juego. El DNS solo busca direcciones antes de conectar.",
+   "'Ping booster' apps and registry network tweaks can't make packets travel faster. Most games don't even use the settings they change.": "Las apps que 'bajan el ping' y los ajustes de red en el registro no hacen que los paquetes viajen más rápido. La mayoría de juegos ni usan lo que cambian.",
+   "Turning off IPv6 doesn't help, and can break some connections.": "Desactivar IPv6 no ayuda y puede romper algunas conexiones.",
+   "Skip these": "Sáltate esto",
+   "Lower ping and stop lag spikes": "Baja el ping y acaba con los picos de lag",
+   "What actually lowers ping and stops spikes: the connection, Wi-Fi placement, bufferbloat and downloads. Plus the popular fixes that don't work.": "Lo que de verdad baja el ping y acaba con los picos: la conexión, la ubicación del Wi-Fi, el bufferbloat y las descargas. Y los arreglos populares que no funcionan.",
+   "Graphics card while gaming: 60 to 80 °C is normal. Its hot spot runs 10 to 20 °C higher.": "Tarjeta gráfica jugando: 60 a 80 °C es normal. Su punto caliente va 10 a 20 °C por encima.",
+   "CPU while gaming: up to the high 80s °C is fine on modern chips. Many are designed to boost until they reach about 90 to 95 °C.": "CPU jugando: hasta casi 90 °C está bien en chips modernos. Muchos están hechos para acelerar hasta unos 90 a 95 °C.",
+   "A problem looks like this: FPS drops after 10 to 20 minutes while temperatures sit at their limit and clocks fall.": "Un problema se ve así: los FPS bajan tras 10 a 20 minutos mientras las temperaturas están en su límite y la velocidad baja.",
+   "What's normal": "Qué es normal",
+   "Clean the dust: PC off and unplugged, short bursts of compressed air, hold fans still so they don't spin. Front filters first.": "Limpia el polvo: PC apagado y desenchufado, ráfagas cortas de aire comprimido y sujeta los ventiladores para que no giren. Primero los filtros delanteros.",
+   "Airflow: front fans pull air in, rear and top fans push it out. A little more in than out keeps dust down.": "Flujo de aire: los ventiladores delanteros meten aire, los traseros y superiores lo sacan. Un poco más de entrada que de salida reduce el polvo.",
+   "Still hot after three or more years? Fresh thermal paste on the CPU cooler usually helps. On a graphics card it can affect the warranty, so check first.": "¿Sigue caliente tras tres años o más? Pasta térmica nueva en el disipador de la CPU suele ayudar. En una tarjeta gráfica puede afectar la garantía, así que míralo antes.",
+   "Laptops: hard flat surface, back raised a little, vents clean, and the maker's performance mode while plugged in.": "Portátiles: superficie dura y plana, la parte trasera un poco elevada, rejillas limpias y el modo rendimiento del fabricante enchufado.",
+   "Fix the heat": "Arregla el calor",
+   "Cap your FPS. A card rendering 300 FPS in a menu is working, and spinning its fans, for nothing.": "Limita los FPS. Una tarjeta que dibuja 300 FPS en un menú trabaja, y gira sus ventiladores, para nada.",
+   "Make it quieter": "Hazlo más silencioso",
+   "Temperatures, dust and fan noise": "Temperaturas, polvo y ruido de ventiladores",
+   "Which temperatures are fine, how to stop heat slowing your games down, and how to make a PC quieter.": "Qué temperaturas son normales, cómo evitar que el calor frene tus juegos y cómo hacer un PC más silencioso.",
+   "Settings": "Ajustes",
+   "BIOS": "BIOS",
+   "Fixes": "Soluciones",
+   "Network": "Red",
+   "Cooling": "Refrigeración",
+   "Easy": "Fácil",
+   "Forcing MSI mode on every device": "Forzar el modo MSI en todos los dispositivos",
+   "Modern graphics and network drivers already use it. Forcing it on devices that don't support it can stop Windows from starting.": "Los controladores modernos de gráficos y red ya lo usan. Forzarlo en dispositivos que no lo admiten puede impedir que Windows arranque.",
+   "Turning off fullscreen optimizations": "Desactivar las optimizaciones de pantalla completa",
+   "On Windows 10 and 11 they give fullscreen speed with fast alt-tab. Only try it for one old game that misbehaves.": "En Windows 10 y 11 dan velocidad de pantalla completa con alt-tab rápido. Pruébalo solo en un juego antiguo que dé problemas.",
+   "RAM cleaners and 'game booster' apps": "Limpiadores de RAM y apps 'potenciadoras de juegos'",
+   "Emptying memory just makes Windows load it again. Free RAM isn't faster RAM.": "Vaciar la memoria solo hace que Windows la vuelva a cargar. RAM libre no es RAM más rápida.",
+   "Changing DNS for lower ping": "Cambiar el DNS para bajar el ping",
+   "DNS only finds the server's address before you connect. In-game ping doesn't change.": "El DNS solo encuentra la dirección del servidor antes de conectar. El ping en el juego no cambia.",
+   "Timer resolution tools": "Herramientas de resolución del temporizador",
+   "Windows 11 already gives games the timer they ask for, and forcing it for everything raises power use.": "Windows 11 ya da a los juegos el temporizador que piden, y forzarlo para todo sube el consumo.",
+   "To undervolt a Radeon card, use AMD Software: Performance → Tuning → Custom, then lower the maximum voltage in small steps and test each one in your game.": "Para hacer undervolt a una Radeon, usa AMD Software: Rendimiento → Ajuste → Personalizado, y baja el voltaje máximo en pasos pequeños, probando cada uno en tu juego.",
+   "Turn on Pulse's performance overlay (Games page) and watch its frame-time graph while it happens.": "Activa la superposición de rendimiento de Pulse (página Juegos) y mira su gráfico de tiempo de fotograma mientras pasa.",
+   "Undervolt the graphics card: often 10 °C cooler at the same FPS. On NVIDIA, Pulse's GPU tuning page walks you through it.": "Haz undervolt a la tarjeta gráfica: a menudo 10 °C menos con los mismos FPS. En NVIDIA, la página de ajuste de GPU de Pulse te guía paso a paso.",
+   "Open GPU tuning": "Abrir ajuste de GPU",
+   "Set gentle fan curves in the BIOS (usually under Hardware Monitor or Smart Fan).": "Pon curvas de ventilador suaves en la BIOS (suele estar en Hardware Monitor o Smart Fan).",
+   "Team Group's CEO expects no price drop next year. Its DDR5 chips cost about 5.5 times more than a year ago, and supply may not catch up before late 2028.": "El CEO de Team Group no espera bajadas de precio el próximo año. Sus chips DDR5 cuestan unas 5,5 veces más que hace un año, y la oferta podría no ponerse al día antes de finales de 2028.",
+   "1080p": "1080p",
+   "1080p / 1440p": "1080p / 1440p",
+   "1440p": "1440p",
+   "1440p / 4K": "1440p / 4K",
+   "16 GB DDR4 (2×8)": "16 GB DDR4 (2×8)",
+   "16 GB DDR5 (2×8)": "16 GB DDR5 (2×8)",
+   "32 GB DDR4 (2×16)": "32 GB DDR4 (2×16)",
+   "32 GB DDR5 (2×16)": "32 GB DDR5 (2×16)",
+   "64 GB DDR4 (2×32)": "64 GB DDR4 (2×32)",
+   "64 GB DDR5 (2×32)": "64 GB DDR5 (2×32)",
+   "Tom's Hardware's best-value gaming CPU, at about $250.": "La CPU para juegos con mejor relación calidad-precio según Tom's Hardware, por unos $250.",
+   "Strong in games and multitasking for about $200 to $220. Tom's Hardware and PC Gamer both pick it.": "Rinde bien en juegos y multitarea por unos $200 a $220. Tom's Hardware y PC Gamer la eligen.",
+   "Radeon cards may get scarcer until January": "Las Radeon podrían escasear hasta enero",
+   "An unconfirmed report from China says AMD's gaming GPU supply is down 20 to 50% since October, with shortages lasting until January 2027. The RX 9070 XT's lowest UK price has already risen to £799.": "Un informe no confirmado desde China dice que el suministro de GPU para juegos de AMD ha caído entre un 20 y un 50% desde octubre, con escasez hasta enero de 2027. El precio más bajo de la RX 9070 XT en Reino Unido ya ha subido a £799.",
+   "Since May 2026, new NVIDIA drivers no longer include the NVIDIA Control Panel. The same settings are in the NVIDIA App (System and Graphics), or you can get the Control Panel free from the Microsoft Store.": "Desde mayo de 2026, los drivers nuevos de NVIDIA ya no incluyen el Panel de control de NVIDIA. Los mismos ajustes están en la NVIDIA App (System y Graphics), o puedes descargar el Panel de control gratis desde Microsoft Store.",
+   "A clean install removes the old NVIDIA Control Panel. Use the NVIDIA App, or get the Control Panel back from the Microsoft Store.": "Una instalación limpia quita el antiguo Panel de control de NVIDIA. Usa la NVIDIA App o recupera el Panel de control desde Microsoft Store.",
+   "NVIDIA App → Graphics → DLSS Override → Model Presets: pick Recommended, so older games use NVIDIA's current DLSS models. (The old \"Latest\" option was replaced by Recommended.)": "NVIDIA App → Gráficos → Anulación de DLSS → Preajustes de modelo: elige Recomendado, para que juegos antiguos usen los modelos DLSS actuales de NVIDIA. (La antigua opción \"Último\" se reemplazó por Recomendado.)",
+   "Vengeance a7500: Ryzen 7 9800X3D + RTX 5070 Ti, 2-year warranty, about $3,000 now": "Vengeance a7500: Ryzen 7 9800X3D + RTX 5070 Ti, 2 años de garantía, unos $3,000 ahora"
+  },
+  "pt-BR": {
+   "36 g for $99.99.": "36 g por US$ 99,99.",
+   "500 Hz OLED": "OLED de 500 Hz",
+   "540 Hz OLED, the top pick of OLED specialists.": "OLED de 540 Hz, a favorita dos especialistas em OLED.",
+   "A 144 Hz screen left at 60 Hz, or a cable in the motherboard instead of the graphics card, costs more than any tweak can win back.": "Uma tela de 144 Hz em 60 Hz, ou um cabo na placa-mãe em vez da placa de vídeo, custa mais do que qualquer ajuste recupera.",
+   "A named power supply brand with an 80 Plus Gold rating.": "Uma fonte de marca conhecida com certificação 80 Plus Gold.",
+   "A prebuilt PC can be the better deal right now: their prices have risen less than the parts.": "Um PC montado pode compensar mais agora: o preço subiu menos que o das peças.",
+   "AI data centers are buying most of the world's memory. A 32 GB DDR5 kit went from about $59 in April 2025 to $429 on November 3, 2026.": "Data centers de IA compram quase toda a memória do mundo. Um kit DDR5 de 32 GB foi de cerca de US$ 59 em abril de 2025 para US$ 429 em 3 de novembro de 2026.",
+   "About 3% faster in games, with about 30% more power draw.": "Cerca de 3% mais rápido em jogos, com cerca de 30% mais consumo.",
+   "About 9% behind the RTX 5080 at 1440p, for less.": "Cerca de 9% atrás da RTX 5080 em 1440p, por menos.",
+   "At least a 1-year warranty with parts and labor.": "Pelo menos 1 ano de garantia com peças e mão de obra.",
+   "BLD and Player series, 2-year warranty": "Séries BLD e Player, 2 anos de garantia",
+   "Best 1440p": "Melhor 1440p",
+   "Best Intel": "Melhor Intel",
+   "Best all-round value, quiet": "Melhor custo-benefício geral, silencioso",
+   "Best build quality": "Melhor qualidade de montagem",
+   "Best for gaming": "Melhor para jogos",
+   "Best overall": "Melhor no geral",
+   "Best performance power mode, Game Mode on, background recording off": "Modo de energia Melhor desempenho, Modo de Jogo ligado, gravação em segundo plano desligada",
+   "Best sound": "Melhor som",
+   "Best value, with 16 GB of video memory.": "Melhor custo-benefício, com 16 GB de memória de vídeo.",
+   "Budget": "Econômico",
+   "Budget OLED": "OLED econômico",
+   "Budget and standard parts": "Econômico e com peças padrão",
+   "Budget wireless": "Sem fio econômico",
+   "Buy RAM as a matched pair. DDR4 and DDR5 don't mix, and adding two more sticks can slow a PC down.": "Compre RAM em par igual. DDR4 e DDR5 não se misturam, e colocar mais dois pentes pode deixar o PC mais lento.",
+   "Check my PC": "Verificar meu PC",
+   "Check which parts are standard": "Confira quais peças são padrão",
+   "Clean looks, easy upgrades": "Visual limpo, fácil de fazer upgrade",
+   "Costs more than mass-market brands": "Custa mais que marcas de massa",
+   "Enable Resizable BAR": "Ative o Resizable BAR",
+   "Ergonomic": "Ergonômico",
+   "Fastest": "O mais rápido",
+   "GPU": "GPU",
+   "Games and Windows expect one. Without it you get crashes when memory runs out, not speed.": "Jogos e o Windows esperam que exista. Sem ele você tem travamentos quando a memória acaba, não velocidade.",
+   "Games on an SSD, and watch the temperatures": "Jogos num SSD, e fique de olho nas temperaturas",
+   "Gaming value": "Melhor custo para jogos",
+   "Get the free speed first: XMP/EXPO, Resizable BAR and your monitor's refresh rate.": "Primeiro a velocidade grátis: XMP/EXPO, Resizable BAR e a taxa do monitor.",
+   "Graphics cards": "Placas de vídeo",
+   "Great sensor without the flagship price.": "Ótimo sensor sem preço de topo de linha.",
+   "Great sound, low latency, fair price.": "Ótimo som, baixa latência, preço justo.",
+   "Hall effect switches and the best rapid trigger software.": "Switches Hall effect e o melhor software de rapid trigger.",
+   "Hall effect, 8K polling and rapid trigger for about $44.": "Hall effect, polling de 8K e rapid trigger por cerca de US$ 44.",
+   "Haptic buttons with adjustable actuation and rapid trigger.": "Botões hápticos com acionamento ajustável e rapid trigger.",
+   "Headsets and mics": "Headsets e microfones",
+   "High": "Alta",
+   "High end": "Topo de linha",
+   "Huge": "enorme",
+   "Keyboards": "Teclados",
+   "Let shaders build, and stop wiping them": "Deixe os shaders compilarem e pare de apagá-los",
+   "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, over 15% in some games. In the BIOS: CSM off, Above 4G Decoding on, Re-Size BAR on.": "Deixa a CPU acessar toda a memória da placa de vídeo de uma vez. Normalmente alguns por cento, mais de 15% em alguns jogos. Na BIOS: CSM desligado, Above 4G Decoding ligado, Re-Size BAR ligado.",
+   "Lightweight": "Ultraleve",
+   "Low": "Baixa",
+   "MG-1, pick every part": "MG-1, você escolhe cada peça",
+   "Many 2017-era tweaks no longer do anything on Windows 11 24H2 and later.": "Muitos ajustes de 2017 não fazem mais nada no Windows 11 24H2 em diante.",
+   "Measure it": "Medir",
+   "Medium": "Média",
+   "Memory Integrity: test before turning it off": "Integridade de memória: teste antes de desligar",
+   "Mice": "Mouses",
+   "Microphone": "Microfone",
+   "Monitors": "Monitores",
+   "Most configurable": "O mais configurável",
+   "New games compile shaders the first time an effect appears, causing hitches that fade. Let the pre-compile step finish, raise the driver's shader cache (10 GB or Unlimited), and skip cleaner apps that delete it.": "Jogos novos compilam shaders na primeira vez que um efeito aparece, causando travadas que somem depois. Deixe a pré-compilação terminar, aumente o cache de shaders do driver (10 GB ou Ilimitado) e evite apps de limpeza que o apagam.",
+   "New games stutter badly on hard drives. Drops that start after 5 to 15 minutes usually mean heat: clean the dust, fix airflow, repaste or undervolt.": "Jogos novos travam muito em HD. Quedas que começam após 5 a 15 minutos geralmente são calor: limpe a poeira, melhore a ventilação, troque a pasta ou faça undervolt.",
+   "No measurable effect on modern Windows, and a real chance of breaking installed software.": "Nenhum efeito medível no Windows moderno, e risco real de quebrar programas instalados.",
+   "OMEN 35L / 45L with 9800X3D options": "OMEN 35L / 45L com opções 9800X3D",
+   "Old \"FPS boost\" registry packs": "Pacotes antigos de registro \"para mais FPS\"",
+   "Open game checklists": "Abrir checklists de jogos",
+   "Open tweaks": "Abrir ajustes",
+   "Premium price": "Preço premium",
+   "Processors": "Processadores",
+   "QD-OLED at 500 Hz for less.": "QD-OLED a 500 Hz por menos.",
+   "RAM": "RAM",
+   "RAM costs four to seven times more than a year ago": "A RAM custa de quatro a sete vezes mais que há um ano",
+   "Rapid trigger without the cable.": "Rapid trigger sem fio.",
+   "Read the exact parts list": "Leia a lista exata de peças",
+   "Registry cleaners": "Limpadores de registro",
+   "Run your monitor at its full refresh rate, from the graphics card": "Use o monitor na taxa máxima, ligado na placa de vídeo",
+   "Ryzen 7 7800X3D + RTX 5070, 32 GB, about $1,400 – $1,530": "Ryzen 7 7800X3D + RTX 5070, 32 GB, cerca de US$ 1.400 – 1.530",
+   "SSD prices are climbing too": "Os SSDs também estão subindo",
+   "See BIOS steps": "Ver passos da BIOS",
+   "Service network and cooling": "Rede de assistência e refrigeração",
+   "Some SSD contract prices are up 303% in a year, with another 15 to 20% expected this quarter.": "Alguns preços de contrato de SSD subiram 303% em um ano, e se espera mais 15 a 20% neste trimestre.",
+   "Some parts are Lenovo's own": "Algumas peças são próprias da Lenovo",
+   "Standard boards, PSUs and cases you can upgrade": "Placas, fontes e gabinetes padrão que você pode trocar",
+   "Standard motherboard and case sizes, so you can upgrade later.": "Placa-mãe e gabinete em tamanho padrão, para fazer upgrade depois.",
+   "Still the one to buy for games.": "Ainda é o que comprar para jogos.",
+   "Storage": "Armazenamento",
+   "The 1440p sweet spot for most players.": "O ponto ideal em 1440p para a maioria.",
+   "The Windows settings that still measurably help. On laptops, use Best performance only when plugged in.": "Os ajustes do Windows que ainda ajudam de forma medível. Em notebooks, use Melhor desempenho só na tomada.",
+   "The best PC gaming headset in lab tests.": "O melhor headset para PC em testes de laboratório.",
+   "The best desk mic for gaming.": "O melhor microfone de mesa para jogos.",
+   "The cheapest 1440p OLED, around $350.": "O OLED 1440p mais barato, cerca de US$ 350.",
+   "The exact graphics card model, not \"RTX 50 series\".": "O modelo exato da placa de vídeo, não \"série RTX 50\".",
+   "The sub-$300 picks at launch prices.": "As opções abaixo de US$ 300 no preço de lançamento.",
+   "The worst may still be ahead": "O pior pode estar por vir",
+   "Top pick at several outlets.": "Favorito em vários sites.",
+   "Top pick for right-handed shapes.": "A melhor opção em formato para destros.",
+   "Turn on XMP or EXPO in the BIOS": "Ative XMP ou EXPO na BIOS",
+   "Turning off the page file": "Desligar o arquivo de paginação",
+   "Two RAM sticks (2×16 GB), not one: a single stick halves memory bandwidth.": "Dois pentes de RAM (2×16 GB), não um: um só pente corta a largura de banda pela metade.",
+   "Upgrade what isn't in short supply: CPUs, monitors, mice and keyboards.": "Faça upgrade do que não está em falta: CPUs, monitores, mouses e teclados.",
+   "Use G-SYNC or FreeSync with the right frame cap": "Use G-SYNC ou FreeSync com o limite de FPS certo",
+   "Used RAM and graphics cards can be cheaper than new; buy SSDs new, because they wear out.": "RAM e placas de vídeo usadas podem sair mais baratas; compre SSD novo, porque eles se desgastam.",
+   "Value": "Valor",
+   "Value varies by config": "O custo-benefício varia com a configuração",
+   "Variable refresh on, V-Sync on in the driver and off in the game. With Reflex on, the driver caps for you (about 138 FPS at 144 Hz); without it, cap a few FPS under your refresh rate.": "Taxa variável ligada, V-Sync ligado no driver e desligado no jogo. Com Reflex, o driver limita por você (cerca de 138 FPS em 144 Hz); sem ele, limite alguns FPS abaixo da sua taxa.",
+   "Windows turned it on for many PCs with the October 2026 update. On modern CPUs it costs under 2% in 2026 tests; older CPUs lose more. Turning it off removes real protection, so only do it if you measure a difference.": "O Windows a ativou em muitos PCs na atualização de outubro de 2026. Em CPUs modernas custa menos de 2% em testes de 2026; CPUs antigas perdem mais. Desligar remove uma proteção real, então só faça se medir diferença.",
+   "Wireless": "Sem fio",
+   "Wireless value": "Sem fio custo-benefício",
+   "Without it, RAM runs at its slow fallback speed (DDR4 3,200, DDR5 4,800). It's one switch and one of the biggest free gains in CPU-heavy games.": "Sem isso, a RAM roda na velocidade lenta padrão (DDR4 3.200, DDR5 4.800). É uma só opção e um dos maiores ganhos grátis em jogos pesados de CPU.",
+   "Plug the monitor into the graphics card, not the motherboard.": "Ligue o monitor na placa de vídeo, não na placa-mãe.",
+   "NVIDIA Control Panel → Change resolution: pick your monitor's highest refresh rate (144 Hz, 165 Hz, 240 Hz...). Windows often leaves it at 60.": "Painel de controle da NVIDIA → Alterar resolução: escolha a maior taxa do seu monitor (144 Hz, 165 Hz, 240 Hz...). O Windows muitas vezes deixa em 60.",
+   "On the same page, set Output dynamic range to Full. Over HDMI it's often Limited, which makes blacks look grey.": "Na mesma página, coloque Faixa dinâmica de saída em Completa. Pelo HDMI costuma vir Limitada, e o preto fica cinza.",
+   "Install drivers from the NVIDIA App or nvidia.com. Update when a game you play needs it or a fix you want is listed; you don't need every release.": "Instale os drivers pelo NVIDIA App ou nvidia.com. Atualize quando um jogo seu precisar ou houver uma correção que interesse; não precisa de toda versão.",
+   "NVIDIA drivers": "Drivers da NVIDIA",
+   "Get the basics right": "O básico bem feito",
+   "Set up G-SYNC: turn it on (for fullscreen, or fullscreen and windowed if you play borderless).": "Configurar G-SYNC: ative (para tela cheia, ou tela cheia e janela se você joga sem bordas).",
+   "Manage 3D settings → Vertical sync: On. Then turn V-Sync off in every game.": "Gerenciar configurações 3D → Sincronização vertical: Ativada. Depois desligue o V-Sync em todo jogo.",
+   "Cap FPS at least 3 below your refresh rate: 141 at 144 Hz, 162 at 165 Hz, 237 at 240 Hz. Use the game's limiter first, otherwise 'Max Frame Rate' in the Control Panel.": "Limite o FPS pelo menos 3 abaixo da taxa: 141 em 144 Hz, 162 em 165 Hz, 237 em 240 Hz. Use primeiro o limitador do jogo; se não tiver, 'Taxa de quadros máxima' no Painel de controle.",
+   "Games with NVIDIA Reflex: turn Reflex on. With G-SYNC and V-Sync on, it caps for you (about 138 FPS at 144 Hz), so you can skip your own cap there.": "Jogos com NVIDIA Reflex: ligue o Reflex. Com G-SYNC e V-Sync ligados, ele limita para você (uns 138 FPS em 144 Hz), então ali você pode pular o seu limite.",
+   "Games without Reflex: set Low Latency Mode to On. 'Ultra' also caps automatically with G-SYNC.": "Jogos sem Reflex: coloque Modo de baixa latência em Ativado. O 'Ultra' também limita sozinho com G-SYNC.",
+   "The G-SYNC recipe": "A receita do G-SYNC",
+   "Blur Busters' tested settings for no tearing with the least input lag. They also work for 'G-SYNC Compatible' FreeSync monitors.": "Os ajustes testados pela Blur Busters para não ter cortes com o menor atraso. Também servem para monitores FreeSync 'G-SYNC Compatible'.",
+   "Shader Cache Size: 10 GB or Unlimited, so games don't recompile shaders (and hitch) as often.": "Tamanho do cache de shader: 10 GB ou Ilimitado, para os jogos não recompilarem shaders (e travarem) com tanta frequência.",
+   "Power management mode: leave it on Normal. Use 'Prefer maximum performance' for one game only if its clocks drop and it stutters; it raises idle power.": "Modo de gerenciamento de energia: deixe em Normal. Use 'Preferir desempenho máximo' só para um jogo se o clock cair e travar; aumenta o consumo parado.",
+   "Leave the rest at default. Texture filtering, anisotropic and the like make no measurable FPS difference on a modern card.": "Deixe o resto no padrão. Filtragem de textura, anisotrópica e parecidos não mudam o FPS de forma mensurável em placa moderna.",
+   "Other settings worth changing": "Outras configurações que valem a pena",
+   "NVIDIA settings for smooth, low-latency games": "Configurações da NVIDIA para jogos fluidos e com pouca latência",
+   "The NVIDIA App and Control Panel settings that actually matter, and the G-SYNC recipe Blur Busters measured as best.": "As configurações do NVIDIA App e do Painel de controle que realmente importam, e a receita de G-SYNC que a Blur Busters mediu como a melhor.",
+   "Plug the monitor into the graphics card, and set its highest refresh rate in Windows → Settings → Display → Advanced display.": "Ligue o monitor na placa de vídeo e coloque a maior taxa em Windows → Configurações → Tela → Tela avançada.",
+   "AMD Software → Settings → Display: turn on AMD FreeSync for your monitor.": "AMD Software → Configurações → Tela: ative o AMD FreeSync para o seu monitor.",
+   "Turn Enhanced Sync off; it can cause stutter with FreeSync.": "Desligue o Enhanced Sync; ele pode causar travadas com FreeSync.",
+   "Display": "Tela",
+   "Use the Default graphics profile, not HYPR-RX: HYPR-RX switches on several features at once, including ones that lower resolution or add generated frames.": "Use o perfil gráfico Padrão, não o HYPR-RX: o HYPR-RX liga vários recursos de uma vez, inclusive alguns que baixam a resolução ou adicionam quadros gerados.",
+   "AMD Anti-Lag: on. In games that support Anti-Lag 2, turn it on in the game's own settings.": "AMD Anti-Lag: ligado. Em jogos com Anti-Lag 2, ligue nas configurações do próprio jogo.",
+   "Wait for Vertical Refresh: 'Always on' if you want no tearing with FreeSync, then turn V-Sync off in the game.": "Aguardar atualização vertical: 'Sempre ativado' se não quiser cortes com FreeSync, e desligue o V-Sync no jogo.",
+   "Cap FPS 3 below your refresh rate with the game's limiter, or with Radeon Chill set to the same minimum and maximum.": "Limite o FPS 3 abaixo da taxa com o limitador do jogo, ou com o Radeon Chill com mínimo e máximo iguais.",
+   "Radeon Boost: off for competitive games. It lowers the resolution while you move.": "Radeon Boost: desligado em jogos competitivos. Ele baixa a resolução enquanto você se mexe.",
+   "Gaming → Graphics": "Jogos → Gráficos",
+   "Get drivers from AMD Software or amd.com. If a game stutters after an update, try the shader cache reset in Graphics → Advanced once.": "Pegue os drivers pelo AMD Software ou amd.com. Se um jogo travar depois de uma atualização, tente uma vez redefinir o cache de shader em Gráficos → Avançado.",
+   "AMD drivers": "Drivers da AMD",
+   "Drivers": "Drivers",
+   "AMD Software settings for smooth, low-latency games": "Configurações do AMD Software para jogos fluidos e com pouca latência",
+   "FreeSync, Anti-Lag, frame caps and what to leave off in AMD Software: Adrenalin Edition.": "FreeSync, Anti-Lag, limite de FPS e o que deixar desligado no AMD Software: Adrenalin Edition.",
+   "Restart and press Delete (or F2) repeatedly as the PC starts. Or in Windows: Settings → System → Recovery → Advanced startup → Restart now → Troubleshoot → Advanced options → UEFI Firmware Settings.": "Reinicie e aperte Delete (ou F2) várias vezes ao ligar. Ou no Windows: Configurações → Sistema → Recuperação → Inicialização avançada → Reiniciar agora → Solução de problemas → Opções avançadas → Configurações de firmware UEFI.",
+   "Most boards open in an Easy mode. Press F7 to switch to Advanced mode if you can't find a setting.": "A maioria das placas abre no modo Fácil. Aperte F7 para ir ao modo Avançado se não achar uma opção.",
+   "Get into the BIOS": "Entrar na BIOS",
+   "ASUS: Ai Tweaker → Ai Overclock Tuner → XMP I (or EXPO). MSI: the A-XMP or EXPO button on the main screen. Gigabyte: Tweaker → Extreme Memory Profile (X.M.P.). ASRock: OC Tweaker → DRAM Profile → XMP or EXPO.": "ASUS: Ai Tweaker → Ai Overclock Tuner → XMP I (ou EXPO). MSI: o botão A-XMP ou EXPO na tela principal. Gigabyte: Tweaker → Extreme Memory Profile (X.M.P.). ASRock: OC Tweaker → DRAM Profile → XMP ou EXPO.",
+   "Save and exit (usually F10). The first start can take a minute or two while the PC trains the memory, especially with DDR5. Don't turn it off.": "Salve e saia (normalmente F10). A primeira inicialização pode levar um ou dois minutos enquanto o PC ajusta a memória, ainda mais com DDR5. Não desligue.",
+   "Check it worked: Task Manager → Performance → Memory → Speed should show your kit's rated speed, for example 6000 MT/s.": "Confira se funcionou: Gerenciador de Tarefas → Desempenho → Memória → Velocidade deve mostrar a velocidade do seu kit, por exemplo 6000 MT/s.",
+   "Pulse's Diagnose page checks this too.": "A página Diagnosticar do Pulse também verifica isso.",
+   "Open Diagnose": "Abrir Diagnosticar",
+   "Won't start, or crashes? Clear the CMOS (the button on the back, or the jumper in the manual) and try the second XMP profile or one speed step lower.": "Não liga ou trava? Limpe a CMOS (o botão atrás, ou o jumper do manual) e tente o segundo perfil XMP ou uma velocidade abaixo.",
+   "Turn on XMP or EXPO": "Ative o XMP ou EXPO",
+   "Without it, RAM runs at its slow fallback speed (DDR4 2,133 to 3,200, DDR5 4,800). It's one of the biggest free gains in CPU-heavy games.": "Sem isso, a RAM roda na velocidade lenta de reserva (DDR4 2.133 a 3.200, DDR5 4.800). É um dos maiores ganhos de graça em jogos que puxam CPU.",
+   "Turn CSM (Compatibility Support Module) off. Windows 11 already boots without it.": "Desligue o CSM (Compatibility Support Module). O Windows 11 já inicia sem ele.",
+   "Turn Above 4G Decoding on, then Re-Size BAR Support on (or Auto). It's usually under Advanced → PCI Subsystem Settings.": "Ative Above 4G Decoding e depois Re-Size BAR Support (ou Auto). Costuma ficar em Advanced → PCI Subsystem Settings.",
+   "Check it: NVIDIA Control Panel → System Information → Resizable BAR: Yes. On AMD, AMD Software → Performance shows Smart Access Memory.": "Confira: Painel de controle da NVIDIA → Informações do sistema → Resizable BAR: Sim. Na AMD, AMD Software → Desempenho mostra Smart Access Memory.",
+   "Turn on Resizable BAR": "Ative o Resizable BAR",
+   "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, more in some games. AMD calls it Smart Access Memory.": "Deixa a CPU acessar toda a memória da placa de vídeo de uma vez. Normalmente alguns por cento, mais em alguns jogos. A AMD chama de Smart Access Memory.",
+   "Update the BIOS only to fix a problem or support a new CPU, and only from your motherboard maker's support page for your exact model.": "Atualize a BIOS só para corrigir um problema ou suportar uma CPU nova, e só pela página de suporte do fabricante da sua placa para o modelo exato.",
+   "An update resets XMP/EXPO and Resizable BAR, so turn them back on afterwards.": "Uma atualização redefine XMP/EXPO e Resizable BAR, então ative de novo depois.",
+   "Never turn the PC off during a BIOS update.": "Nunca desligue o PC durante uma atualização de BIOS.",
+   "BIOS updates": "Atualizações de BIOS",
+   "BIOS: XMP/EXPO and Resizable BAR": "BIOS: XMP/EXPO e Resizable BAR",
+   "The two BIOS switches most gaming PCs are missing, with the menu names for ASUS, MSI, Gigabyte and ASRock boards.": "Os dois interruptores da BIOS que faltam na maioria dos PCs gamer, com os nomes dos menus para placas ASUS, MSI, Gigabyte e ASRock.",
+   "Download the driver you want to install first (from NVIDIA, AMD or Intel) and keep it on the desktop.": "Baixe primeiro o driver que você quer instalar (da NVIDIA, AMD ou Intel) e deixe na área de trabalho.",
+   "Download Display Driver Uninstaller (DDU) from its official site, Wagnardsoft, and unzip it.": "Baixe o Display Driver Uninstaller (DDU) do site oficial, Wagnardsoft, e descompacte.",
+   "Open Wagnardsoft": "Abrir Wagnardsoft",
+   "In Pulse, turn on 'Stop Windows Update replacing your graphics driver' so Windows doesn't sneak its own driver in while you work.": "No Pulse, ative 'Impedir que o Windows Update troque seu driver de vídeo' para o Windows não colocar o dele enquanto você trabalha.",
+   "Open Tweaks": "Abrir Ajustes",
+   "Unplug the network cable or turn Wi-Fi off.": "Desconecte o cabo de rede ou desligue o Wi-Fi.",
+   "Prepare": "Prepare",
+   "Restart into Safe Mode: hold Shift and click Restart → Troubleshoot → Advanced options → Startup Settings → Restart → press 4.": "Reinicie no Modo de segurança: segure Shift e clique em Reiniciar → Solução de problemas → Opções avançadas → Configurações de inicialização → Reiniciar → aperte 4.",
+   "Run DDU, pick GPU and your brand on the right, then 'Clean and restart'.": "Abra o DDU, escolha GPU e sua marca à direita e depois 'Clean and restart'.",
+   "Back in Windows, run the driver you downloaded. On NVIDIA pick Custom → Clean installation if offered.": "De volta ao Windows, rode o driver que você baixou. Na NVIDIA escolha Personalizada → Instalação limpa se aparecer.",
+   "Reconnect to the internet, then set your refresh rate and driver settings again (the NVIDIA or AMD settings guide).": "Conecte de novo na internet e ajuste outra vez a taxa e as configurações do driver (o guia de configurações da NVIDIA ou AMD).",
+   "Remove and reinstall": "Remover e reinstalar",
+   "Clean graphics driver reinstall with DDU": "Reinstalação limpa do driver de vídeo com DDU",
+   "The fix for crashes, black screens and stutter that started after a driver update, or when switching between NVIDIA and AMD.": "A solução para falhas, tela preta e travadas que começaram depois de atualizar o driver, ou ao trocar entre NVIDIA e AMD.",
+   "Spikes the first time you see an effect or a new area, fewer the second time: shader compilation. See the next chapter.": "Picos na primeira vez que aparece um efeito ou área nova, menos na segunda: compilação de shaders. Veja o próximo capítulo.",
+   "Regular spikes every few seconds, even standing still: something in the background. See 'Background apps'.": "Picos regulares a cada poucos segundos, mesmo parado: algo em segundo plano. Veja 'Apps em segundo plano'.",
+   "FPS fine at first, then dropping after 10 to 20 minutes: heat. See the cooling guide.": "FPS bom no começo e caindo depois de 10 a 20 minutos: calor. Veja o guia de refrigeração.",
+   "Hitching in big or detailed areas, with video memory near full in the overlay: VRAM. Lower texture quality one step.": "Travadas em áreas grandes ou detalhadas, com a memória de vídeo quase cheia na sobreposição: VRAM. Baixe um nível a qualidade de textura.",
+   "Pulse's Diagnose page checks the common causes for you: refresh rate, RAM speed, power plan, drivers and more.": "A página Diagnosticar do Pulse verifica as causas comuns para você: taxa de atualização, velocidade da RAM, plano de energia, drivers e mais.",
+   "Find the kind of stutter": "Descubra o tipo de travada",
+   "Let the game's 'compiling shaders' step finish before you play, even if it takes minutes.": "Deixe a etapa de 'compilando shaders' do jogo terminar antes de jogar, mesmo que demore minutos.",
+   "Raise the driver's shader cache to 10 GB or Unlimited (NVIDIA) and don't let cleaner apps wipe it. Pulse's cleanup never deletes it.": "Aumente o cache de shader do driver para 10 GB ou Ilimitado (NVIDIA) e não deixe apps de limpeza apagarem. A limpeza do Pulse nunca apaga.",
+   "After a driver update, expect the first session in each game to hitch again while shaders rebuild.": "Depois de atualizar o driver, espere a primeira partida de cada jogo travar de novo enquanto os shaders são refeitos.",
+   "Shader compilation": "Compilação de shaders",
+   "Close what you don't need while playing: browser tabs with video, launchers you're not using, RGB and peripheral apps you don't need open.": "Feche o que não precisa enquanto joga: abas do navegador com vídeo, launchers que não está usando, apps de RGB e periféricos que não precisam ficar abertos.",
+   "Only one overlay and one recorder at a time (Discord, Steam, NVIDIA, Xbox Game Bar, Medal). Each one hooks into the game.": "Só uma sobreposição e um gravador por vez (Discord, Steam, NVIDIA, Xbox Game Bar, Medal). Cada um se prende ao jogo.",
+   "Pause big downloads and Windows Update while you play, or use Pulse's tweak that limits update bandwidth.": "Pause downloads grandes e o Windows Update enquanto joga, ou use o ajuste do Pulse que limita a banda das atualizações.",
+   "Trim what starts with Windows on Pulse's Startup apps page.": "Corte o que inicia com o Windows na página Apps de inicialização do Pulse.",
+   "Open Startup apps": "Abrir Apps de inicialização",
+   "Background apps": "Apps em segundo plano",
+   "Games on an SSD, with at least 10 to 15% of the drive free.": "Jogos em um SSD, com pelo menos 10 a 15% do disco livre.",
+   "RAM in two matching sticks (dual channel), with XMP or EXPO on. One stick halves memory bandwidth.": "RAM em dois pentes iguais (dual channel), com XMP ou EXPO ligado. Um pente só corta pela metade a banda da memória.",
+   "Laptops: plugged in, on the maker's performance mode, with the game running on the dedicated graphics card.": "Notebooks: na tomada, no modo desempenho do fabricante, com o jogo rodando na placa de vídeo dedicada.",
+   "Cap your FPS a little below what you can hold most of the time. Steady 120 feels smoother than 120 to 200 jumping around.": "Limite o FPS um pouco abaixo do que você mantém quase sempre. 120 estáveis parecem mais fluidos que pular entre 120 e 200.",
+   "Hardware basics": "O básico do hardware",
+   "Fix stutter and FPS drops": "Corrija travadas e quedas de FPS",
+   "Work out what kind of stutter you have, then fix the cause: shaders, video memory, background apps, storage, heat or frame pacing.": "Descubra que tipo de travada você tem e corrija a causa: shaders, memória de vídeo, apps em segundo plano, armazenamento, calor ou ritmo de quadros.",
+   "Use an Ethernet cable if you can. It removes most lag spikes Wi-Fi causes. Powerline adapters are the next best thing.": "Use cabo Ethernet se puder. Ele tira a maioria dos picos que o Wi-Fi causa. Adaptadores powerline são a próxima melhor opção.",
+   "On Wi-Fi: connect on 5 GHz or 6 GHz, not 2.4 GHz, and keep the router in the open, not in a cupboard or behind the TV.": "No Wi-Fi: conecte em 5 GHz ou 6 GHz, não em 2,4 GHz, e deixe o roteador à vista, não dentro de armário nem atrás da TV.",
+   "Pick the game server or region closest to you. Distance is most of your ping, and no PC setting changes it.": "Escolha o servidor ou região do jogo mais próxima. A distância é a maior parte do seu ping, e nenhum ajuste do PC muda isso.",
+   "The connection": "A conexão",
+   "Run Waveform's bufferbloat test. A grade of C or worse means your ping jumps whenever the connection is busy.": "Faça o teste de bufferbloat da Waveform. Nota C ou pior quer dizer que seu ping pula sempre que a conexão está ocupada.",
+   "Open the test": "Abrir o teste",
+   "Fix it on the router: turn on Smart Queue, SQM or Adaptive QoS (names vary), set to about 90% of your measured speed.": "Corrija no roteador: ative Smart Queue, SQM ou QoS adaptativo (o nome varia), em uns 90% da velocidade medida.",
+   "No such setting on your router? Pause Steam, console and Windows downloads while you play.": "Seu roteador não tem isso? Pause downloads do Steam, consoles e Windows enquanto joga.",
+   "Bufferbloat: lag when someone else downloads": "Bufferbloat: lag quando alguém baixa algo",
+   "Changing DNS doesn't change in-game ping. DNS only looks up addresses before you connect.": "Trocar o DNS não muda o ping no jogo. O DNS só procura endereços antes de conectar.",
+   "'Ping booster' apps and registry network tweaks can't make packets travel faster. Most games don't even use the settings they change.": "Apps que 'baixam o ping' e ajustes de rede no registro não fazem os pacotes viajarem mais rápido. A maioria dos jogos nem usa o que eles mudam.",
+   "Turning off IPv6 doesn't help, and can break some connections.": "Desligar o IPv6 não ajuda e pode quebrar algumas conexões.",
+   "Skip these": "Pule isto",
+   "Lower ping and stop lag spikes": "Baixe o ping e acabe com os picos de lag",
+   "What actually lowers ping and stops spikes: the connection, Wi-Fi placement, bufferbloat and downloads. Plus the popular fixes that don't work.": "O que realmente baixa o ping e acaba com os picos: a conexão, a posição do Wi-Fi, o bufferbloat e os downloads. E as soluções populares que não funcionam.",
+   "Graphics card while gaming: 60 to 80 °C is normal. Its hot spot runs 10 to 20 °C higher.": "Placa de vídeo jogando: 60 a 80 °C é normal. O hot spot fica 10 a 20 °C acima.",
+   "CPU while gaming: up to the high 80s °C is fine on modern chips. Many are designed to boost until they reach about 90 to 95 °C.": "CPU jogando: até perto de 90 °C está ok em chips modernos. Muitos são feitos para acelerar até uns 90 a 95 °C.",
+   "A problem looks like this: FPS drops after 10 to 20 minutes while temperatures sit at their limit and clocks fall.": "Um problema é assim: o FPS cai depois de 10 a 20 minutos enquanto a temperatura fica no limite e o clock cai.",
+   "What's normal": "O que é normal",
+   "Clean the dust: PC off and unplugged, short bursts of compressed air, hold fans still so they don't spin. Front filters first.": "Tire a poeira: PC desligado e fora da tomada, jatos curtos de ar comprimido e segure as ventoinhas para não girarem. Primeiro os filtros da frente.",
+   "Airflow: front fans pull air in, rear and top fans push it out. A little more in than out keeps dust down.": "Fluxo de ar: as ventoinhas da frente puxam ar, as de trás e de cima jogam para fora. Um pouco mais entrando que saindo reduz a poeira.",
+   "Still hot after three or more years? Fresh thermal paste on the CPU cooler usually helps. On a graphics card it can affect the warranty, so check first.": "Continua quente depois de três anos ou mais? Pasta térmica nova no cooler da CPU costuma ajudar. Na placa de vídeo pode afetar a garantia, então confira antes.",
+   "Laptops: hard flat surface, back raised a little, vents clean, and the maker's performance mode while plugged in.": "Notebooks: superfície dura e plana, traseira um pouco elevada, saídas de ar limpas e o modo desempenho do fabricante na tomada.",
+   "Fix the heat": "Resolva o calor",
+   "Cap your FPS. A card rendering 300 FPS in a menu is working, and spinning its fans, for nothing.": "Limite o FPS. Uma placa fazendo 300 FPS em um menu está trabalhando, e girando as ventoinhas, à toa.",
+   "Make it quieter": "Deixe mais silencioso",
+   "Temperatures, dust and fan noise": "Temperaturas, poeira e barulho das ventoinhas",
+   "Which temperatures are fine, how to stop heat slowing your games down, and how to make a PC quieter.": "Quais temperaturas são normais, como impedir que o calor deixe os jogos lentos e como deixar o PC mais silencioso.",
+   "Settings": "Configurações",
+   "BIOS": "BIOS",
+   "Fixes": "Soluções",
+   "Network": "Rede",
+   "Cooling": "Refrigeração",
+   "Easy": "Fácil",
+   "Forcing MSI mode on every device": "Forçar o modo MSI em todos os dispositivos",
+   "Modern graphics and network drivers already use it. Forcing it on devices that don't support it can stop Windows from starting.": "Drivers modernos de vídeo e rede já usam. Forçar em dispositivos que não suportam pode impedir o Windows de iniciar.",
+   "Turning off fullscreen optimizations": "Desligar as otimizações de tela cheia",
+   "On Windows 10 and 11 they give fullscreen speed with fast alt-tab. Only try it for one old game that misbehaves.": "No Windows 10 e 11 elas dão velocidade de tela cheia com alt-tab rápido. Só teste em um jogo antigo que dê problema.",
+   "RAM cleaners and 'game booster' apps": "Limpadores de RAM e apps 'turbo para jogos'",
+   "Emptying memory just makes Windows load it again. Free RAM isn't faster RAM.": "Esvaziar a memória só faz o Windows carregar tudo de novo. RAM livre não é RAM mais rápida.",
+   "Changing DNS for lower ping": "Trocar o DNS para baixar o ping",
+   "DNS only finds the server's address before you connect. In-game ping doesn't change.": "O DNS só acha o endereço do servidor antes de conectar. O ping no jogo não muda.",
+   "Timer resolution tools": "Ferramentas de resolução do timer",
+   "Windows 11 already gives games the timer they ask for, and forcing it for everything raises power use.": "O Windows 11 já dá aos jogos o timer que eles pedem, e forçar para tudo aumenta o consumo.",
+   "To undervolt a Radeon card, use AMD Software: Performance → Tuning → Custom, then lower the maximum voltage in small steps and test each one in your game.": "Para undervolt em uma Radeon, use o AMD Software: Desempenho → Ajuste → Personalizado, e baixe a tensão máxima em passos pequenos, testando cada um no seu jogo.",
+   "Turn on Pulse's performance overlay (Games page) and watch its frame-time graph while it happens.": "Ligue a sobreposição de desempenho do Pulse (página Jogos) e olhe o gráfico de tempo de quadro enquanto acontece.",
+   "Undervolt the graphics card: often 10 °C cooler at the same FPS. On NVIDIA, Pulse's GPU tuning page walks you through it.": "Faça undervolt na placa de vídeo: muitas vezes 10 °C a menos com o mesmo FPS. Na NVIDIA, a página de ajuste de GPU do Pulse mostra o passo a passo.",
+   "Open GPU tuning": "Abrir ajuste de GPU",
+   "Set gentle fan curves in the BIOS (usually under Hardware Monitor or Smart Fan).": "Configure curvas suaves de ventoinha na BIOS (normalmente em Hardware Monitor ou Smart Fan).",
+   "Team Group's CEO expects no price drop next year. Its DDR5 chips cost about 5.5 times more than a year ago, and supply may not catch up before late 2028.": "O CEO da Team Group não espera queda de preço no ano que vem. Os chips DDR5 dela custam cerca de 5,5 vezes mais que há um ano, e a oferta pode não se normalizar antes do fim de 2028.",
+   "1080p": "1080p",
+   "1080p / 1440p": "1080p / 1440p",
+   "1440p": "1440p",
+   "1440p / 4K": "1440p / 4K",
+   "16 GB DDR4 (2×8)": "16 GB DDR4 (2×8)",
+   "16 GB DDR5 (2×8)": "16 GB DDR5 (2×8)",
+   "32 GB DDR4 (2×16)": "32 GB DDR4 (2×16)",
+   "32 GB DDR5 (2×16)": "32 GB DDR5 (2×16)",
+   "64 GB DDR4 (2×32)": "64 GB DDR4 (2×32)",
+   "64 GB DDR5 (2×32)": "64 GB DDR5 (2×32)",
+   "Tom's Hardware's best-value gaming CPU, at about $250.": "A CPU para jogos com melhor custo-benefício segundo a Tom's Hardware, por cerca de US$ 250.",
+   "Strong in games and multitasking for about $200 to $220. Tom's Hardware and PC Gamer both pick it.": "Vai bem em jogos e multitarefa por cerca de US$ 200 a US$ 220. Tom's Hardware e PC Gamer a escolhem.",
+   "Radeon cards may get scarcer until January": "As Radeon podem ficar mais escassas até janeiro",
+   "An unconfirmed report from China says AMD's gaming GPU supply is down 20 to 50% since October, with shortages lasting until January 2027. The RX 9070 XT's lowest UK price has already risen to £799.": "Um relato não confirmado da China diz que a oferta de GPUs para jogos da AMD caiu de 20% a 50% desde outubro, com falta até janeiro de 2027. O menor preço da RX 9070 XT no Reino Unido já subiu para £799.",
+   "Since May 2026, new NVIDIA drivers no longer include the NVIDIA Control Panel. The same settings are in the NVIDIA App (System and Graphics), or you can get the Control Panel free from the Microsoft Store.": "Desde maio de 2026, os drivers novos da NVIDIA não incluem mais o Painel de controle da NVIDIA. Os mesmos ajustes estão no NVIDIA App (System e Graphics), ou você pode baixar o Painel de controle de graça na Microsoft Store.",
+   "A clean install removes the old NVIDIA Control Panel. Use the NVIDIA App, or get the Control Panel back from the Microsoft Store.": "Uma instalação limpa remove o antigo Painel de controle da NVIDIA. Use o NVIDIA App ou recupere o Painel de controle na Microsoft Store.",
+   "NVIDIA App → Graphics → DLSS Override → Model Presets: pick Recommended, so older games use NVIDIA's current DLSS models. (The old \"Latest\" option was replaced by Recommended.)": "NVIDIA App → Gráficos → Substituição do DLSS → Predefinições de modelo: escolha Recomendado, para jogos antigos usarem os modelos DLSS atuais da NVIDIA. (A antiga opção \"Mais recente\" foi substituída por Recomendado.)",
+   "Vengeance a7500: Ryzen 7 9800X3D + RTX 5070 Ti, 2-year warranty, about $3,000 now": "Vengeance a7500: Ryzen 7 9800X3D + RTX 5070 Ti, 2 anos de garantia, cerca de US$ 3.000 agora"
+  }
+ },
+ "Guides": [
+  {
+   "Id": "nvidia-settings",
+   "Title": "NVIDIA settings for smooth, low-latency games",
+   "Summary": "The NVIDIA App and Control Panel settings that actually matter, and the G-SYNC recipe Blur Busters measured as best.",
+   "Category": "Settings",
+   "Minutes": 15,
+   "Level": "Easy",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "Get the basics right",
+     "Intro": "Since May 2026, new NVIDIA drivers no longer include the NVIDIA Control Panel. The same settings are in the NVIDIA App (System and Graphics), or you can get the Control Panel free from the Microsoft Store.",
+     "Steps": [
+      {
+       "Text": "Plug the monitor into the graphics card, not the motherboard."
+      },
+      {
+       "Text": "NVIDIA Control Panel → Change resolution: pick your monitor's highest refresh rate (144 Hz, 165 Hz, 240 Hz...). Windows often leaves it at 60."
+      },
+      {
+       "Text": "On the same page, set Output dynamic range to Full. Over HDMI it's often Limited, which makes blacks look grey."
+      },
+      {
+       "Text": "Install drivers from the NVIDIA App or nvidia.com. Update when a game you play needs it or a fix you want is listed; you don't need every release.",
+       "Button": "NVIDIA drivers",
+       "Url": "https://www.nvidia.com/en-us/drivers/"
+      }
+     ]
+    },
+    {
+     "Title": "The G-SYNC recipe",
+     "Intro": "Blur Busters' tested settings for no tearing with the least input lag. They also work for 'G-SYNC Compatible' FreeSync monitors.",
+     "Steps": [
+      {
+       "Text": "Set up G-SYNC: turn it on (for fullscreen, or fullscreen and windowed if you play borderless)."
+      },
+      {
+       "Text": "Manage 3D settings → Vertical sync: On. Then turn V-Sync off in every game."
+      },
+      {
+       "Text": "Cap FPS at least 3 below your refresh rate: 141 at 144 Hz, 162 at 165 Hz, 237 at 240 Hz. Use the game's limiter first, otherwise 'Max Frame Rate' in the Control Panel."
+      },
+      {
+       "Text": "Games with NVIDIA Reflex: turn Reflex on. With G-SYNC and V-Sync on, it caps for you (about 138 FPS at 144 Hz), so you can skip your own cap there."
+      },
+      {
+       "Text": "Games without Reflex: set Low Latency Mode to On. 'Ultra' also caps automatically with G-SYNC."
+      }
+     ]
+    },
+    {
+     "Title": "Other settings worth changing",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Shader Cache Size: 10 GB or Unlimited, so games don't recompile shaders (and hitch) as often."
+      },
+      {
+       "Text": "NVIDIA App → Graphics → DLSS Override → Model Presets: pick Recommended, so older games use NVIDIA's current DLSS models. (The old \"Latest\" option was replaced by Recommended.)"
+      },
+      {
+       "Text": "Power management mode: leave it on Normal. Use 'Prefer maximum performance' for one game only if its clocks drop and it stutters; it raises idle power."
+      },
+      {
+       "Text": "Leave the rest at default. Texture filtering, anisotropic and the like make no measurable FPS difference on a modern card."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "Blur Busters G-SYNC 101: optimal settings",
+     "Url": "https://www.blurbusters.com/gsync/gsync101-input-lag-tests-and-settings/14/"
+    },
+    {
+     "Name": "NVIDIA Reflex",
+     "Url": "https://www.nvidia.com/en-us/geforce/technologies/reflex/"
+    },
+    {
+     "Name": "NVIDIA App",
+     "Url": "https://www.nvidia.com/en-us/software/nvidia-app/"
+    },
+    {
+     "Name": "Tom's Hardware: NVIDIA Control Panel no longer ships with drivers",
+     "Url": "https://www.tomshardware.com/pc-components/gpus/nvidia-is-finally-ditching-its-iconic-control-panel-after-20-years-new-driver-updates-only-ship-in-the-nvidia-app"
+    },
+    {
+     "Name": "NVIDIA App release highlights",
+     "Url": "https://www.nvidia.com/en-us/software/nvidia-app/release-highlights/"
+    }
+   ]
+  },
+  {
+   "Id": "amd-settings",
+   "Title": "AMD Software settings for smooth, low-latency games",
+   "Summary": "FreeSync, Anti-Lag, frame caps and what to leave off in AMD Software: Adrenalin Edition.",
+   "Category": "Settings",
+   "Minutes": 15,
+   "Level": "Easy",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "Display",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Plug the monitor into the graphics card, and set its highest refresh rate in Windows → Settings → Display → Advanced display."
+      },
+      {
+       "Text": "AMD Software → Settings → Display: turn on AMD FreeSync for your monitor."
+      },
+      {
+       "Text": "Turn Enhanced Sync off; it can cause stutter with FreeSync."
+      }
+     ]
+    },
+    {
+     "Title": "Gaming → Graphics",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Use the Default graphics profile, not HYPR-RX: HYPR-RX switches on several features at once, including ones that lower resolution or add generated frames."
+      },
+      {
+       "Text": "AMD Anti-Lag: on. In games that support Anti-Lag 2, turn it on in the game's own settings."
+      },
+      {
+       "Text": "Wait for Vertical Refresh: 'Always on' if you want no tearing with FreeSync, then turn V-Sync off in the game."
+      },
+      {
+       "Text": "Cap FPS 3 below your refresh rate with the game's limiter, or with Radeon Chill set to the same minimum and maximum."
+      },
+      {
+       "Text": "Radeon Boost: off for competitive games. It lowers the resolution while you move."
+      }
+     ]
+    },
+    {
+     "Title": "Drivers",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Get drivers from AMD Software or amd.com. If a game stutters after an update, try the shader cache reset in Graphics → Advanced once.",
+       "Button": "AMD drivers",
+       "Url": "https://www.amd.com/en/support/download/drivers.html"
+      },
+      {
+       "Text": "To undervolt a Radeon card, use AMD Software: Performance → Tuning → Custom, then lower the maximum voltage in small steps and test each one in your game."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "AMD Software: Adrenalin Edition",
+     "Url": "https://www.amd.com/en/support/download/drivers.html"
+    }
+   ]
+  },
+  {
+   "Id": "bios",
+   "Title": "BIOS: XMP/EXPO and Resizable BAR",
+   "Summary": "The two BIOS switches most gaming PCs are missing, with the menu names for ASUS, MSI, Gigabyte and ASRock boards.",
+   "Category": "BIOS",
+   "Minutes": 15,
+   "Level": "Medium",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "Get into the BIOS",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Restart and press Delete (or F2) repeatedly as the PC starts. Or in Windows: Settings → System → Recovery → Advanced startup → Restart now → Troubleshoot → Advanced options → UEFI Firmware Settings."
+      },
+      {
+       "Text": "Most boards open in an Easy mode. Press F7 to switch to Advanced mode if you can't find a setting."
+      }
+     ]
+    },
+    {
+     "Title": "Turn on XMP or EXPO",
+     "Intro": "Without it, RAM runs at its slow fallback speed (DDR4 2,133 to 3,200, DDR5 4,800). It's one of the biggest free gains in CPU-heavy games.",
+     "Steps": [
+      {
+       "Text": "ASUS: Ai Tweaker → Ai Overclock Tuner → XMP I (or EXPO). MSI: the A-XMP or EXPO button on the main screen. Gigabyte: Tweaker → Extreme Memory Profile (X.M.P.). ASRock: OC Tweaker → DRAM Profile → XMP or EXPO."
+      },
+      {
+       "Text": "Save and exit (usually F10). The first start can take a minute or two while the PC trains the memory, especially with DDR5. Don't turn it off."
+      },
+      {
+       "Text": "Check it worked: Task Manager → Performance → Memory → Speed should show your kit's rated speed, for example 6000 MT/s.",
+       "Tip": "Pulse's Diagnose page checks this too.",
+       "Button": "Open Diagnose",
+       "Page": "diagnose"
+      },
+      {
+       "Text": "Won't start, or crashes? Clear the CMOS (the button on the back, or the jumper in the manual) and try the second XMP profile or one speed step lower."
+      }
+     ]
+    },
+    {
+     "Title": "Turn on Resizable BAR",
+     "Intro": "Lets the CPU reach all of the graphics card's memory at once. Usually a few percent, more in some games. AMD calls it Smart Access Memory.",
+     "Steps": [
+      {
+       "Text": "Turn CSM (Compatibility Support Module) off. Windows 11 already boots without it."
+      },
+      {
+       "Text": "Turn Above 4G Decoding on, then Re-Size BAR Support on (or Auto). It's usually under Advanced → PCI Subsystem Settings."
+      },
+      {
+       "Text": "Check it: NVIDIA Control Panel → System Information → Resizable BAR: Yes. On AMD, AMD Software → Performance shows Smart Access Memory."
+      }
+     ]
+    },
+    {
+     "Title": "BIOS updates",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Update the BIOS only to fix a problem or support a new CPU, and only from your motherboard maker's support page for your exact model."
+      },
+      {
+       "Text": "An update resets XMP/EXPO and Resizable BAR, so turn them back on afterwards.",
+       "Warn": "Never turn the PC off during a BIOS update."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "Club386: Resizable BAR on or off?",
+     "Url": "https://www.club386.com/resizable-bar-on-or-off/"
+    }
+   ]
+  },
+  {
+   "Id": "clean-driver",
+   "Title": "Clean graphics driver reinstall with DDU",
+   "Summary": "The fix for crashes, black screens and stutter that started after a driver update, or when switching between NVIDIA and AMD.",
+   "Category": "Fixes",
+   "Minutes": 20,
+   "Level": "Medium",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "Prepare",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Download the driver you want to install first (from NVIDIA, AMD or Intel) and keep it on the desktop."
+      },
+      {
+       "Text": "Download Display Driver Uninstaller (DDU) from its official site, Wagnardsoft, and unzip it.",
+       "Button": "Open Wagnardsoft",
+       "Url": "https://www.wagnardsoft.com/"
+      },
+      {
+       "Text": "In Pulse, turn on 'Stop Windows Update replacing your graphics driver' so Windows doesn't sneak its own driver in while you work.",
+       "Button": "Open Tweaks",
+       "Page": "tweaks"
+      },
+      {
+       "Text": "Unplug the network cable or turn Wi-Fi off."
+      }
+     ]
+    },
+    {
+     "Title": "Remove and reinstall",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Restart into Safe Mode: hold Shift and click Restart → Troubleshoot → Advanced options → Startup Settings → Restart → press 4."
+      },
+      {
+       "Text": "Run DDU, pick GPU and your brand on the right, then 'Clean and restart'."
+      },
+      {
+       "Text": "Back in Windows, run the driver you downloaded. On NVIDIA pick Custom → Clean installation if offered.",
+       "Tip": "A clean install removes the old NVIDIA Control Panel. Use the NVIDIA App, or get the Control Panel back from the Microsoft Store."
+      },
+      {
+       "Text": "Reconnect to the internet, then set your refresh rate and driver settings again (the NVIDIA or AMD settings guide)."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "Wagnardsoft: Display Driver Uninstaller",
+     "Url": "https://www.wagnardsoft.com/"
+    },
+    {
+     "Name": "Tom's Hardware: NVIDIA Control Panel no longer ships with drivers",
+     "Url": "https://www.tomshardware.com/pc-components/gpus/nvidia-is-finally-ditching-its-iconic-control-panel-after-20-years-new-driver-updates-only-ship-in-the-nvidia-app"
+    }
+   ]
+  },
+  {
+   "Id": "stutter",
+   "Title": "Fix stutter and FPS drops",
+   "Summary": "Work out what kind of stutter you have, then fix the cause: shaders, video memory, background apps, storage, heat or frame pacing.",
+   "Category": "Fixes",
+   "Minutes": 20,
+   "Level": "Easy",
+   "Tool": null,
+   "Featured": true,
+   "Chapters": [
+    {
+     "Title": "Find the kind of stutter",
+     "Intro": "Turn on Pulse's performance overlay (Games page) and watch its frame-time graph while it happens.",
+     "Steps": [
+      {
+       "Text": "Spikes the first time you see an effect or a new area, fewer the second time: shader compilation. See the next chapter."
+      },
+      {
+       "Text": "Regular spikes every few seconds, even standing still: something in the background. See 'Background apps'."
+      },
+      {
+       "Text": "FPS fine at first, then dropping after 10 to 20 minutes: heat. See the cooling guide."
+      },
+      {
+       "Text": "Hitching in big or detailed areas, with video memory near full in the overlay: VRAM. Lower texture quality one step."
+      },
+      {
+       "Text": "Pulse's Diagnose page checks the common causes for you: refresh rate, RAM speed, power plan, drivers and more.",
+       "Button": "Check my PC",
+       "Page": "diagnose"
+      }
+     ]
+    },
+    {
+     "Title": "Shader compilation",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Let the game's 'compiling shaders' step finish before you play, even if it takes minutes."
+      },
+      {
+       "Text": "Raise the driver's shader cache to 10 GB or Unlimited (NVIDIA) and don't let cleaner apps wipe it. Pulse's cleanup never deletes it."
+      },
+      {
+       "Text": "After a driver update, expect the first session in each game to hitch again while shaders rebuild."
+      }
+     ]
+    },
+    {
+     "Title": "Background apps",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Close what you don't need while playing: browser tabs with video, launchers you're not using, RGB and peripheral apps you don't need open."
+      },
+      {
+       "Text": "Only one overlay and one recorder at a time (Discord, Steam, NVIDIA, Xbox Game Bar, Medal). Each one hooks into the game."
+      },
+      {
+       "Text": "Pause big downloads and Windows Update while you play, or use Pulse's tweak that limits update bandwidth."
+      },
+      {
+       "Text": "Trim what starts with Windows on Pulse's Startup apps page.",
+       "Button": "Open Startup apps",
+       "Page": "startup"
+      }
+     ]
+    },
+    {
+     "Title": "Hardware basics",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Games on an SSD, with at least 10 to 15% of the drive free."
+      },
+      {
+       "Text": "RAM in two matching sticks (dual channel), with XMP or EXPO on. One stick halves memory bandwidth."
+      },
+      {
+       "Text": "Laptops: plugged in, on the maker's performance mode, with the game running on the dedicated graphics card."
+      },
+      {
+       "Text": "Cap your FPS a little below what you can hold most of the time. Steady 120 feels smoother than 120 to 200 jumping around."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "PCGameCheck: why is my game stuttering",
+     "Url": "https://pcgamecheck.com/blog/why-is-my-game-stuttering-fix"
+    }
+   ]
+  },
+  {
+   "Id": "ping",
+   "Title": "Lower ping and stop lag spikes",
+   "Summary": "What actually lowers ping and stops spikes: the connection, Wi-Fi placement, bufferbloat and downloads. Plus the popular fixes that don't work.",
+   "Category": "Network",
+   "Minutes": 15,
+   "Level": "Easy",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "The connection",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Use an Ethernet cable if you can. It removes most lag spikes Wi-Fi causes. Powerline adapters are the next best thing."
+      },
+      {
+       "Text": "On Wi-Fi: connect on 5 GHz or 6 GHz, not 2.4 GHz, and keep the router in the open, not in a cupboard or behind the TV."
+      },
+      {
+       "Text": "Pick the game server or region closest to you. Distance is most of your ping, and no PC setting changes it."
+      }
+     ]
+    },
+    {
+     "Title": "Bufferbloat: lag when someone else downloads",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Run Waveform's bufferbloat test. A grade of C or worse means your ping jumps whenever the connection is busy.",
+       "Button": "Open the test",
+       "Url": "https://www.waveform.com/tools/bufferbloat"
+      },
+      {
+       "Text": "Fix it on the router: turn on Smart Queue, SQM or Adaptive QoS (names vary), set to about 90% of your measured speed."
+      },
+      {
+       "Text": "No such setting on your router? Pause Steam, console and Windows downloads while you play."
+      }
+     ]
+    },
+    {
+     "Title": "Skip these",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Changing DNS doesn't change in-game ping. DNS only looks up addresses before you connect."
+      },
+      {
+       "Text": "'Ping booster' apps and registry network tweaks can't make packets travel faster. Most games don't even use the settings they change."
+      },
+      {
+       "Text": "Turning off IPv6 doesn't help, and can break some connections."
+      }
+     ]
+    }
+   ],
+   "Sources": [
+    {
+     "Name": "Waveform: bufferbloat test",
+     "Url": "https://www.waveform.com/tools/bufferbloat"
+    }
+   ]
+  },
+  {
+   "Id": "cooling",
+   "Title": "Temperatures, dust and fan noise",
+   "Summary": "Which temperatures are fine, how to stop heat slowing your games down, and how to make a PC quieter.",
+   "Category": "Cooling",
+   "Minutes": 15,
+   "Level": "Easy",
+   "Tool": null,
+   "Featured": false,
+   "Chapters": [
+    {
+     "Title": "What's normal",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Graphics card while gaming: 60 to 80 °C is normal. Its hot spot runs 10 to 20 °C higher."
+      },
+      {
+       "Text": "CPU while gaming: up to the high 80s °C is fine on modern chips. Many are designed to boost until they reach about 90 to 95 °C."
+      },
+      {
+       "Text": "A problem looks like this: FPS drops after 10 to 20 minutes while temperatures sit at their limit and clocks fall."
+      }
+     ]
+    },
+    {
+     "Title": "Fix the heat",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Clean the dust: PC off and unplugged, short bursts of compressed air, hold fans still so they don't spin. Front filters first."
+      },
+      {
+       "Text": "Airflow: front fans pull air in, rear and top fans push it out. A little more in than out keeps dust down."
+      },
+      {
+       "Text": "Undervolt the graphics card: often 10 °C cooler at the same FPS. On NVIDIA, Pulse's GPU tuning page walks you through it.",
+       "Button": "Open GPU tuning",
+       "Page": "gpu"
+      },
+      {
+       "Text": "Still hot after three or more years? Fresh thermal paste on the CPU cooler usually helps. On a graphics card it can affect the warranty, so check first."
+      },
+      {
+       "Text": "Laptops: hard flat surface, back raised a little, vents clean, and the maker's performance mode while plugged in."
+      }
+     ]
+    },
+    {
+     "Title": "Make it quieter",
+     "Intro": null,
+     "Steps": [
+      {
+       "Text": "Set gentle fan curves in the BIOS (usually under Hardware Monitor or Smart Fan)."
+      },
+      {
+       "Text": "Cap your FPS. A card rendering 300 FPS in a menu is working, and spinning its fans, for nothing."
+      }
+     ]
+    }
+   ],
+   "Sources": []
+  }
+ ]
+}
