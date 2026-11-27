@@ -1,0 +1,598 @@
+From ff2aa18575d1b29351c083d6e5cde7eaa3fdf0f9 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 26 Nov 2026 23:41:26 -0500
+Subject: [PATCH 1/2] Clips: no repeated frames, no stretching 4:3 with black
+ bars, links copied instantly
+
+Ported from the old repo (the two changes made after this copy was taken):
+- Window capture asks for twice the clip's frame rate, so 60 FPS clips don't get
+  bursts of repeated frames.
+- Stretched-resolution clips only stretch when the game really is stretched.
+- Share link copies the link the moment the upload starts; the clip server's page
+  already embeds in Discord while it finishes; the button becomes Copy link.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012ggSmWjhyZchpR6anAiJkR
+---
+ server/clip-links/src/index.js                |  24 +++-
+ server/clip-links/test/test.mjs               |  11 +-
+ src/PulseOptimizer/Core/Clips/ClipLinks.cs    |   7 +-
+ .../Core/Clips/DisplayScaling.cs              | 126 ++++++++++++++++++
+ .../Core/Clips/ReplayRecorder.cs              |  25 +++-
+ src/PulseOptimizer/Lang/es.json               |   8 +-
+ src/PulseOptimizer/Lang/pt-BR.json            |   8 +-
+ src/PulseOptimizer/Pages/ClipsPage.xaml       |   2 +-
+ src/PulseOptimizer/Pages/ClipsPage.xaml.cs    |  78 +++++++++--
+ tests/PulseOptimizer.Tests/ClipsTests.cs      |  22 +++
+ 10 files changed, 286 insertions(+), 25 deletions(-)
+ create mode 100644 src/PulseOptimizer/Core/Clips/DisplayScaling.cs
+
+diff --git a/server/clip-links/src/index.js b/server/clip-links/src/index.js
+index d8d7975..0a5efc3 100644
+--- a/server/clip-links/src/index.js
++++ b/server/clip-links/src/index.js
+@@ -94,7 +94,9 @@ async function start(req, env) {
+ 
+ async function clipPage(env, id) {
+   const meta = await clip(env, id).info();
+-  if (!meta || !meta.done)
++  // A link is handed out the moment its upload starts (like Medal's). Until it finishes, the page already carries the
++  // video tags, so a link pasted into Discord right away still embeds; people who open it see it finish uploading.
++  if (!meta)
+     return page(env, "Clip not found", "<p class=\"note\">This clip doesn't exist, or it was shared a while ago and has expired.</p>", 404);
+   const b = base(env);
+   const src = `${b}/v/${id}.mp4`, link = `${b}/c/${id}`;
+@@ -123,6 +125,15 @@ async function clipPage(env, id) {
+ <meta name="twitter:player:width" content="${w}">
+ <meta name="twitter:player:height" content="${hgt}">
+ <meta name="theme-color" content="#FF4655">`;
++  if (!meta.done) {
++    const wait = `
++<main class="note">
++  <h1>${esc(title)}</h1>
++  <p>Still uploading. It plays here in a few seconds.</p>
++</main>
++<script>setTimeout(() => location.reload(), 3000)</script>`;
++    return page(env, title, wait, 200, headTags, true);
++  }
+   const body = `
+ <main class="clip">
+   <video src="${src}"${img ? ` poster="${img}"` : ""} controls autoplay playsinline preload="metadata" style="aspect-ratio:${w}/${hgt}"></video>
+@@ -176,7 +187,12 @@ export class Clip extends DurableObject {
+       if (action === "video" || action === "picture") return new Response("Not found", { status: 404 });
+       return json({ error: "This clip doesn't exist (or has expired)." }, 404);
+     }
+-    if (action === "video") return m.done ? this.video(req, m) : new Response("Not found", { status: 404 });
++    if (action === "video") {
++      // Still uploading: wait for it (up to 25 s) instead of failing, so a player that asks early still plays.
++      let cur = m;
++      for (let i = 0; i < 25 && cur && !cur.done; i++) { await new Promise(r => setTimeout(r, 1000)); cur = this.meta(); }
++      return cur && cur.done ? this.video(req, cur) : new Response("Not found", { status: 404, headers: { "Retry-After": "3" } });
++    }
+     if (action === "picture") {
+       const row = this.sql.exec("SELECT data FROM pic WHERE n=0").toArray()[0];
+       return row ? new Response(row.data, { headers: { "Content-Type": "image/jpeg", "Cache-Control": "public, max-age=86400" } }) : new Response("Not found", { status: 404 });
+@@ -368,7 +384,7 @@ function catboxPage(env, url, video, picture) {
+ 
+ // ───────── helpers ─────────
+ 
+-function page(env, title, inner, status = 200, headTags = "") {
++function page(env, title, inner, status = 200, headTags = "", noStore = false) {
+   const html = `<!DOCTYPE html>
+ <html lang="en"><head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+@@ -391,7 +407,7 @@ function page(env, title, inner, status = 200, headTags = "") {
+   .note a { color: #FF6B76; }
+ </style></head>
+ <body><header><a href="https://github.com/haisakie/pulse"><span class="logo"></span>Pulse</a></header>${inner}</body></html>`;
+-  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": status === 200 ? "public, max-age=300" : "no-store" } });
++  return new Response(html, { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": status === 200 && !noStore ? "public, max-age=300" : "no-store" } });
+ }
+ 
+ function base(env) { return (env.PUBLIC_URL || ORIGIN).replace(/\/$/, ""); }
+diff --git a/server/clip-links/test/test.mjs b/server/clip-links/test/test.mjs
+index b2ce625..22e2380 100644
+--- a/server/clip-links/test/test.mjs
++++ b/server/clip-links/test/test.mjs
+@@ -46,8 +46,15 @@ assert.ok(s.token.length >= 32);
+ assert.equal(parts.length, 3);
+ console.log("uploaded", s.id, s.url);
+ 
+-// Not finished yet: no page
+-assert.equal((await call(`/c/${s.id}`)).status, 404);
++// Not finished yet: the link already works, carries the video tags (for Discord) and says it's still uploading
++{
++  const r = await call(`/c/${s.id}`);
++  assert.equal(r.status, 200);
++  assert.equal(r.headers.get("Cache-Control"), "no-store");
++  const html = await r.text();
++  assert.match(html, /Still uploading/);
++  assert.match(html, /og:video" content="[^"]*\/v\//);
++}
+ // A part sent again (after a dropped connection) just replaces itself
+ {
+   const p2 = mp4.subarray(s.partSize, 2 * s.partSize);
+diff --git a/src/PulseOptimizer/Core/Clips/ClipLinks.cs b/src/PulseOptimizer/Core/Clips/ClipLinks.cs
+index e314b20..7af4d98 100644
+--- a/src/PulseOptimizer/Core/Clips/ClipLinks.cs
++++ b/src/PulseOptimizer/Core/Clips/ClipLinks.cs
+@@ -48,12 +48,17 @@ public static class ClipLinks
+ 
+     /// <summary>Uploads <paramref name="file"/> (an H.264 MP4) and returns its link. <paramref name="progress"/> goes 0 → 1.</summary>
+     public static async Task<SharedLink> Share(string file, string thumbnail, string title, string game, int width, int height, double seconds,
+-        IProgress<double> progress = null, CancellationToken ct = default)
++        IProgress<double> progress = null, CancellationToken ct = default, Action<SharedLink> started = null)
+     {
+         long size = new FileInfo(file).Length;
+         if (size > MaxBytes) throw new InvalidOperationException("This clip is too long to share as a link. Trim it to a few minutes and try again.");
+ 
+         var start = await Send<Started>(HttpMethod.Post, "/api/clips", null, Json(new { size, title, game, width, height, seconds }), ct);
++        // The link works from now on (its page says it's still uploading until it's done), so it can be copied straight
++        // away, like Medal's. The picture goes first, so a link pasted into Discord right away shows it.
++        if (thumbnail != null && File.Exists(thumbnail) && new FileInfo(thumbnail).Length < 1_400_000)
++            try { await Send<JsonElement>(HttpMethod.Put, $"/api/clips/{start.id}/thumb", start.token, new ByteArrayContent(await File.ReadAllBytesAsync(thumbnail, ct)), ct); thumbnail = null; } catch { }
++        try { started?.Invoke(new SharedLink { Id = start.id, Url = start.url, Token = start.token, Expires = start.expires.ToUniversalTime() }); } catch { }
+         // Three parts go up at once: one connection rarely fills an upload line (each part waits for the server's answer
+         // before the next starts), and the server stores parts in any order.
+         int count = (int)((size + start.partSize - 1) / start.partSize);
+diff --git a/src/PulseOptimizer/Core/Clips/DisplayScaling.cs b/src/PulseOptimizer/Core/Clips/DisplayScaling.cs
+new file mode 100644
+index 0000000..7b5a971
+--- /dev/null
++++ b/src/PulseOptimizer/Core/Clips/DisplayScaling.cs
+@@ -0,0 +1,126 @@
++using System.Diagnostics;
++using System.IO;
++using System.Runtime.InteropServices;
++
++namespace Pulse.Core.Clips;
++
++/// <summary>
++/// Whether a 4:3 (or other narrower) game on this screen is really shown stretched, or in the middle with black bars.
++/// Windows reports how each display's picture is fitted (stretched, centered, or kept in shape with bars), which is
++/// what the graphics driver's "Full-screen" / "Aspect ratio" scaling sets. VALORANT can also add its own black bars
++/// (its letterbox setting). Clips are only stretched when the game really is.
++/// </summary>
++public static class DisplayScaling
++{
++    // DISPLAYCONFIG_SCALING values.
++    public const int Identity = 1, Centered = 2, Stretched = 3, AspectRatio = 4, Custom = 5, Preferred = 128;
++
++    /// <summary>
++    /// Stretch the clip to the screen's shape? Not when the game draws its own black bars, nor when the display keeps
++    /// the picture's shape (bars) or centers it. Otherwise yes, as before: most drivers stretch by default.
++    /// </summary>
++    public static bool Stretches(int? scaling, bool? gameLetterbox) =>
++        gameLetterbox != true && scaling is not (Centered or AspectRatio);
++
++    /// <summary>How Windows fits pictures on the display a window is on (a DISPLAYCONFIG_SCALING value), or null.</summary>
++    public static int? ForWindow(IntPtr window)
++    {
++        if (!OperatingSystem.IsWindows() || window == IntPtr.Zero) return null;
++        try
++        {
++            var mi = new MONITORINFOEX { cbSize = Marshal.SizeOf<MONITORINFOEX>() };
++            if (!GetMonitorInfo(MonitorFromWindow(window, 2), ref mi)) return null;
++            return ForDevice(mi.szDevice);
++        }
++        catch { return null; }
++    }
++
++    /// <summary>How Windows fits pictures on the given display (\\.\DISPLAYn), or null.</summary>
++    public static int? ForDevice(string device)
++    {
++        if (!OperatingSystem.IsWindows() || string.IsNullOrEmpty(device)) return null;
++        try
++        {
++            const uint QDC_ONLY_ACTIVE_PATHS = 2;
++            if (GetDisplayConfigBufferSizes(QDC_ONLY_ACTIVE_PATHS, out uint np, out uint nm) != 0) return null;
++            var paths = new byte[np * PathSize];
++            var modes = new byte[nm * ModeSize];
++            if (QueryDisplayConfig(QDC_ONLY_ACTIVE_PATHS, ref np, paths, ref nm, modes, IntPtr.Zero) != 0) return null;
++            for (int i = 0; i < np; i++)
++            {
++                int o = i * PathSize;
++                // sourceInfo: adapterId (LUID, 8 bytes), id. targetInfo starts at 20; its scaling is the 6th field after the LUID.
++                var name = new DISPLAYCONFIG_SOURCE_DEVICE_NAME
++                {
++                    type = 1, size = (uint)Marshal.SizeOf<DISPLAYCONFIG_SOURCE_DEVICE_NAME>(),
++                    adapterLow = BitConverter.ToUInt32(paths, o), adapterHigh = BitConverter.ToInt32(paths, o + 4), id = BitConverter.ToUInt32(paths, o + 8),
++                };
++                if (DisplayConfigGetDeviceInfo(ref name) != 0) continue;
++                if (!string.Equals(name.viewGdiDeviceName, device, StringComparison.OrdinalIgnoreCase)) continue;
++                return (int)BitConverter.ToUInt32(paths, o + 20 + 24);
++            }
++        }
++        catch { }
++        return null;
++    }
++
++    /// <summary>VALORANT's own letterbox setting (black bars around a narrower resolution), from its newest settings file.</summary>
++    public static bool? ValorantLetterbox()
++    {
++        try
++        {
++            var root = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "VALORANT", "Saved", "Config");
++            if (!Directory.Exists(root)) return null;
++            var newest = Directory.EnumerateFiles(root, "GameUserSettings.ini", SearchOption.AllDirectories)
++                .Select(f => new FileInfo(f)).OrderByDescending(f => f.LastWriteTimeUtc).FirstOrDefault();
++            return newest == null ? null : Letterbox(File.ReadAllText(newest.FullName));
++        }
++        catch { return null; }
++    }
++
++    /// <summary>bShouldLetterbox from a VALORANT GameUserSettings.ini (null when it isn't there).</summary>
++    internal static bool? Letterbox(string ini)
++    {
++        foreach (var raw in ini.Split('\n'))
++        {
++            var line = raw.Trim();
++            if (line.StartsWith("bShouldLetterbox=", StringComparison.OrdinalIgnoreCase))
++                return line.EndsWith("True", StringComparison.OrdinalIgnoreCase);
++        }
++        return null;
++    }
++
++    /// <summary>True when the process is VALORANT.</summary>
++    public static bool IsValorant(int pid)
++    {
++        if (pid <= 0) return false;
++        try { using var p = Process.GetProcessById(pid); return p.ProcessName.StartsWith("VALORANT", StringComparison.OrdinalIgnoreCase); }
++        catch { return false; }
++    }
++
++    const int PathSize = 72, ModeSize = 64;
++
++    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
++    struct MONITORINFOEX
++    {
++        public int cbSize;
++        public int l, t, r, b, wl, wt, wr, wb;
++        public uint dwFlags;
++        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string szDevice;
++    }
++
++    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
++    struct DISPLAYCONFIG_SOURCE_DEVICE_NAME
++    {
++        public uint type, size, adapterLow;
++        public int adapterHigh;
++        public uint id;
++        [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)] public string viewGdiDeviceName;
++    }
++
++    [DllImport("user32.dll")] static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint flags);
++    [DllImport("user32.dll", CharSet = CharSet.Unicode)] static extern bool GetMonitorInfo(IntPtr monitor, ref MONITORINFOEX info);
++    [DllImport("user32.dll")] static extern int GetDisplayConfigBufferSizes(uint flags, out uint numPaths, out uint numModes);
++    [DllImport("user32.dll")] static extern int QueryDisplayConfig(uint flags, ref uint numPaths, [Out] byte[] paths, ref uint numModes, [Out] byte[] modes, IntPtr topology);
++    [DllImport("user32.dll")] static extern int DisplayConfigGetDeviceInfo(ref DISPLAYCONFIG_SOURCE_DEVICE_NAME name);
++}
+diff --git a/src/PulseOptimizer/Core/Clips/ReplayRecorder.cs b/src/PulseOptimizer/Core/Clips/ReplayRecorder.cs
+index 3d17334..e0cb0ea 100644
+--- a/src/PulseOptimizer/Core/Clips/ReplayRecorder.cs
++++ b/src/PulseOptimizer/Core/Clips/ReplayRecorder.cs
+@@ -67,9 +67,12 @@ public sealed class ReplayRecorder : IDisposable
+     public double ScreenAspect { get; set; }
+ 
+     /// <summary>Stream-copy options that make a stretched-resolution recording play stretched, or "".</summary>
++    /// <summary>False when the game shows black bars instead of stretching (decided when recording starts).</summary>
++    bool _stretchOk = true;
++
+     async Task<string> StretchFor(string ts)
+     {
+-        if (!_s.StretchToScreen || ScreenAspect <= 0) return "";
++        if (!_s.StretchToScreen || !_stretchOk || ScreenAspect <= 0) return "";
+         var (w, h) = await ClipLibrary.VideoSize(ts);
+         return ClipLibrary.StretchCopyArgs(_encoder.Codec, ClipLibrary.StretchSar(w, h, ScreenAspect));
+     }
+@@ -82,7 +85,7 @@ public sealed class ReplayRecorder : IDisposable
+     /// </summary>
+     (int W, int H) StretchCanvas()
+     {
+-        if (!_s.StretchToScreen || ScreenAspect <= 0 || _window == IntPtr.Zero || !OperatingSystem.IsWindows()) return default;
++        if (!_s.StretchToScreen || !_stretchOk || ScreenAspect <= 0 || _window == IntPtr.Zero || !OperatingSystem.IsWindows()) return default;
+         try
+         {
+             if (!GetWindowRect(_window, out var wr)) return default;
+@@ -176,6 +179,15 @@ public sealed class ReplayRecorder : IDisposable
+             }
+         }
+ 
++        // Only stretch when the game really is stretched on screen (not black bars from the driver or VALORANT).
++        if (_s.StretchToScreen && _window != IntPtr.Zero)
++        {
++            var scaling = DisplayScaling.ForWindow(_window);
++            var letterbox = DisplayScaling.IsValorant(_gamePid) ? DisplayScaling.ValorantLetterbox() : null;
++            _stretchOk = DisplayScaling.Stretches(scaling, letterbox);
++            lock (_log) _log.WriteLine($"display scaling {scaling?.ToString() ?? "unknown"}, game letterbox {letterbox?.ToString() ?? "n/a"}: {(_stretchOk ? "stretch" : "keep shape")}");
++        }
++
+         var args = Arguments(_s, _encoder, gamePipe != null ? $@"\\.\pipe\{id}-game" : null, micPipe != null ? $@"\\.\pipe\{id}-mic" : null, _window,
+             appPipes.Select(a => (a.Title, a.Pipe)).ToList(), TrackTitles, VideoLevel, StretchCanvas());
+         _ffmpeg = Process.Start(Ffmpeg.Start(args, redirectOut: true))!;
+@@ -205,6 +217,11 @@ public sealed class ReplayRecorder : IDisposable
+         var a = new List<string> { "-hide_banner", "-loglevel", "warning", "-nostats" };
+         int fps = Math.Clamp(s.Fps, 24, 240);
+         int cursor = s.RecordCursor ? 1 : 0;
++        // Window capture is asked for twice the clip's frame rate. Asking for exactly 60 made Windows hold back any
++        // picture that came a hair under 1/60 s after the last one, so a 60 FPS clip got bursts of repeated frames
++        // (every third frame on a 120 Hz screen: judder). With twice as many to pick from, the steady-rate step below
++        // always has a fresh picture for each frame.
++        int grab = Math.Min(fps * 2, 480);
+ 
+         // Input 0: grabbed on the graphics card. Either the game's own window (Windows Graphics Capture, which keeps
+         // working when the game changes display mode or moves screens; no yellow border, size kept and rounded to even
+@@ -213,9 +230,9 @@ public sealed class ReplayRecorder : IDisposable
+         // (resize_mode=scale), so a stretched resolution is recorded stretched; otherwise the window's own size, and a
+         // window that changes size is fitted inside it (scale_aspect).
+         if (window != IntPtr.Zero && canvas.W > 0 && canvas.H > 0)
+-            a.Add($"-thread_queue_size 64 -f lavfi -i gfxcapture=hwnd={(long)window}:capture_cursor={cursor}:capture_border=0:display_border=0:max_framerate={fps}:resize_mode=scale:width={canvas.W}:height={canvas.H}");
++            a.Add($"-thread_queue_size 64 -f lavfi -i gfxcapture=hwnd={(long)window}:capture_cursor={cursor}:capture_border=0:display_border=0:max_framerate={grab}:resize_mode=scale:width={canvas.W}:height={canvas.H}");
+         else if (window != IntPtr.Zero)
+-            a.Add($"-thread_queue_size 64 -f lavfi -i gfxcapture=hwnd={(long)window}:capture_cursor={cursor}:capture_border=0:display_border=0:max_framerate={fps}:resize_mode=scale_aspect:width=-2:height=-2");
++            a.Add($"-thread_queue_size 64 -f lavfi -i gfxcapture=hwnd={(long)window}:capture_cursor={cursor}:capture_border=0:display_border=0:max_framerate={grab}:resize_mode=scale_aspect:width=-2:height=-2");
+         else
+             a.Add($"-thread_queue_size 64 -f lavfi -i ddagrab=output_idx={Math.Max(0, s.Monitor)}:framerate={fps}:draw_mouse={cursor}");
+         // Window capture sends a frame when the game draws one; make it a steady frame rate like the screen capture.
+diff --git a/src/PulseOptimizer/Lang/es.json b/src/PulseOptimizer/Lang/es.json
+index c1cae48..3fd1540 100644
+--- a/src/PulseOptimizer/Lang/es.json
++++ b/src/PulseOptimizer/Lang/es.json
+@@ -6680,5 +6680,11 @@
+  "That isn't a gamepadviewer.com link. Copy the whole link from gamepadviewer, starting with https://gamepadviewer.com/": "Eso no es un enlace de gamepadviewer.com. Copia el enlace completo de gamepadviewer, empezando por https://gamepadviewer.com/",
+  "Closing in {0} seconds, or click Close now": "Se cierra en {0} segundos, o haz clic en Cerrar ahora",
+  "Closing in 1 second, or click Close now": "Se cierra en 1 segundo, o haz clic en Cerrar ahora",
+- "Stays open while you point at it": "Sigue abierto mientras lo señalas"
++ "Stays open while you point at it": "Sigue abierto mientras lo señalas",
++ "Link copied. It's still uploading and plays as soon as it's done.": "Enlace copiado. Aún se está subiendo y se reproduce en cuanto termine.",
++ "Link copied. Paste it now: the clip finishes uploading in the background.": "Enlace copiado. Pégalo ya: el clip termina de subirse en segundo plano.",
++ "Your clip finished uploading. The link plays everywhere now.": "Tu clip terminó de subirse. El enlace ya se reproduce en todas partes.",
++ "The upload didn't finish, so the link you copied won't play. Press Share link to try again.": "La subida no terminó, así que el enlace que copiaste no se reproducirá. Pulsa Compartir enlace para intentarlo de nuevo.",
++ "Copy link ({0:0%} uploaded)": "Copiar enlace ({0:0%} subido)",
++ "Copy link": "Copiar enlace"
+ }
+diff --git a/src/PulseOptimizer/Lang/pt-BR.json b/src/PulseOptimizer/Lang/pt-BR.json
+index f998a64..9c63aa0 100644
+--- a/src/PulseOptimizer/Lang/pt-BR.json
++++ b/src/PulseOptimizer/Lang/pt-BR.json
+@@ -6680,5 +6680,11 @@
+  "That isn't a gamepadviewer.com link. Copy the whole link from gamepadviewer, starting with https://gamepadviewer.com/": "Isso não é um link do gamepadviewer.com. Copie o link inteiro do gamepadviewer, começando com https://gamepadviewer.com/",
+  "Closing in {0} seconds, or click Close now": "Fecha em {0} segundos, ou clique em Fechar agora",
+  "Closing in 1 second, or click Close now": "Fecha em 1 segundo, ou clique em Fechar agora",
+- "Stays open while you point at it": "Fica aberto enquanto você aponta para ele"
++ "Stays open while you point at it": "Fica aberto enquanto você aponta para ele",
++ "Link copied. It's still uploading and plays as soon as it's done.": "Link copiado. Ainda está enviando e toca assim que terminar.",
++ "Link copied. Paste it now: the clip finishes uploading in the background.": "Link copiado. Cole agora: o clipe termina de enviar em segundo plano.",
++ "Your clip finished uploading. The link plays everywhere now.": "Seu clipe terminou de enviar. O link já toca em qualquer lugar.",
++ "The upload didn't finish, so the link you copied won't play. Press Share link to try again.": "O envio não terminou, então o link que você copiou não vai tocar. Clique em Compartilhar link para tentar de novo.",
++ "Copy link ({0:0%} uploaded)": "Copiar link ({0:0%} enviado)",
++ "Copy link": "Copiar link"
+ }
+diff --git a/src/PulseOptimizer/Pages/ClipsPage.xaml b/src/PulseOptimizer/Pages/ClipsPage.xaml
+index 94b1a57..2f95d52 100644
+--- a/src/PulseOptimizer/Pages/ClipsPage.xaml
++++ b/src/PulseOptimizer/Pages/ClipsPage.xaml
+@@ -789,7 +789,7 @@
+                                     ToolTip="High quality, no 10 MB limit. Plays right inside Discord, no Nitro needed. Anyone with the link can watch it for 7 days.">
+                                 <StackPanel Orientation="Horizontal">
+                                     <ui:LineIcon Kind="link" Width="14.9" Height="14.9"/>
+-                                    <TextBlock Text="Share link" Margin="8,0,0,0"/>
++                                    <TextBlock x:Name="LinkText" Text="Share link" Margin="8,0,0,0"/>
+                                 </StackPanel>
+                             </Button>
+                         </StackPanel>
+diff --git a/src/PulseOptimizer/Pages/ClipsPage.xaml.cs b/src/PulseOptimizer/Pages/ClipsPage.xaml.cs
+index 3c355ef..d80af71 100644
+--- a/src/PulseOptimizer/Pages/ClipsPage.xaml.cs
++++ b/src/PulseOptimizer/Pages/ClipsPage.xaml.cs
+@@ -105,6 +105,7 @@ public partial class ClipsPage : UserControl, IPage, IReleasable, IKeepAlive
+         Timeline.Seek += Timeline_Seek;
+         Timeline.SelectionChanged += UpdateTimes;
+         Timeline.SelectionChanged += SchedulePrep;
++        Timeline.SelectionChanged += ShowLinkButton;
+         Timeline.PreviewMouseLeftButtonUp += Timeline_MouseUp;
+         PlayerLayer.PreviewKeyDown += Player_KeyDown;
+     }
+@@ -990,6 +991,7 @@ public partial class ClipsPage : UserControl, IPage, IReleasable, IKeepAlive
+         if ((sender as FrameworkElement)?.Tag is not ClipVm vm) return;
+         if (SelectToggle.IsChecked == true) { vm.Selected = !vm.Selected; UpdateSelection(); return; }
+         _open = vm;
++        ShowLinkButton();
+         Timeline.Markers = ClipLibrary.LoadMarks(vm.Clip.Path);
+         Timeline.Moments = new();
+         MomentsLegend.Visibility = Visibility.Collapsed;
+@@ -1516,9 +1518,10 @@ public partial class ClipsPage : UserControl, IPage, IReleasable, IKeepAlive
+         {
+             if (had.Unshared) { had.Unshared = false; TweakEngine.Save(); }
+             CopyLink(had.Url);
+-            MainWindow.Instance.Toast(Loc.T("Link copied. Paste it anywhere: it plays right in Discord."), ToastKind.Success);
++            MainWindow.Instance.Toast(Loc.T(_uploading.ContainsKey(key) ? "Link copied. It's still uploading and plays as soon as it's done." : "Link copied. Paste it anywhere: it plays right in Discord."), ToastKind.Success);
+             return;
+         }
++        if (_uploading.ContainsKey(key)) return;
+         // Once: what sharing means. The host is public and anonymous, so a shared clip can't be taken back.
+         if (!S.LinksNoteSeen)
+         {
+@@ -1550,17 +1553,54 @@ public partial class ClipsPage : UserControl, IPage, IReleasable, IKeepAlive
+             var (w, h) = await ClipLibrary.VideoSize(file);
+             steps[0].Finish(Format.Bytes(new FileInfo(file).Length));
+             steps[1].Start();
+-            var progress = new Progress<double>(p => steps[1].Detail = $"{p:0%}");
++            bool copied = false;
++            var progress = new Progress<double>(p =>
++            {
++                steps[1].Detail = $"{p:0%}";
++                if (copied) { _uploading[key] = p; if (_open?.Clip.Path == clip.Path) ShowLinkButton(); }
++            });
+             var title = S.Titles.TryGetValue(Path.GetFileNameWithoutExtension(clip.Path), out var t) ? t : clip.Game ?? "";
+-            var link = await ClipLinks.Share(file, ClipLibrary.ThumbFor(clip.Path), title, clip.Game ?? "", w, h, seconds, progress, cancel.Token);
+-            MainWindow.Instance.AllowStepStop(null); // the link exists now
+-            link.From = from; link.To = to;
+-            S.Links[key] = link;
+-            TweakEngine.Save();
+-            steps[1].Finish(Loc.T("Done"));
+-            CopyLink(link.Url);
+-            TweakEngine.AddLog("clips", $"Shared a link to {key}");
+-            await MainWindow.Instance.FinishSteps("Link copied", Loc.F("{0} is on your clipboard. Paste it in Discord or anywhere else. It works for 7 days.", link.Url));
++            // The link is copied the moment the upload starts; the rest goes up in the background.
++            void Started(SharedLink early) => Dispatcher.Invoke(() =>
++            {
++                copied = true;
++                early.From = from; early.To = to;
++                S.Links[key] = early;
++                TweakEngine.Save();
++                _uploading[key] = 0;
++                CopyLink(early.Url);
++                MainWindow.Instance.AllowStepStop(null);
++                MainWindow.Instance.CloseSteps();
++                MainWindow.Instance.Toast(Loc.T("Link copied. Paste it now: the clip finishes uploading in the background."), ToastKind.Success);
++                if (_open?.Clip.Path == clip.Path) ShowLinkButton();
++            });
++            try
++            {
++                var link = await ClipLinks.Share(file, ClipLibrary.ThumbFor(clip.Path), title, clip.Game ?? "", w, h, seconds, progress, cancel.Token, Started);
++                link.From = from; link.To = to;
++                S.Links[key] = link;
++                TweakEngine.Save();
++                TweakEngine.AddLog("clips", $"Shared a link to {key}");
++                if (!copied)
++                {
++                    steps[1].Finish(Loc.T("Done"));
++                    CopyLink(link.Url);
++                    await MainWindow.Instance.FinishSteps("Link copied", Loc.F("{0} is on your clipboard. Paste it in Discord or anywhere else. It works for 7 days.", link.Url));
++                }
++                else MainWindow.Instance.Toast(Loc.T("Your clip finished uploading. The link plays everywhere now."), ToastKind.Success);
++            }
++            catch when (copied)
++            {
++                // The link was already handed out: it won't work, so say so plainly.
++                S.Links.Remove(key);
++                TweakEngine.Save();
++                MainWindow.Instance.Toast(Loc.T("The upload didn't finish, so the link you copied won't play. Press Share link to try again."), ToastKind.Warning);
++            }
++            finally
++            {
++                _uploading.Remove(key);
++                if (_open?.Clip.Path == clip.Path) ShowLinkButton();
++            }
+         }
+         catch (OperationCanceledException) when (cancel.IsCancellationRequested)
+         {
+@@ -1579,6 +1619,22 @@ public partial class ClipsPage : UserControl, IPage, IReleasable, IKeepAlive
+ 
+     static void CopyLink(string url) { try { Clipboard.SetText(url); } catch { } }
+ 
++    /// <summary>Clips whose link is still uploading, and how far along (0 → 1).</summary>
++    readonly Dictionary<string, double> _uploading = new(StringComparer.OrdinalIgnoreCase);
++
++    /// <summary>"Copy link" once the open clip (this part of it) has a link, with the upload's progress while it goes up.</summary>
++    void ShowLinkButton()
++    {
++        if (_open == null || LinkText == null) return;
++        var key = Path.GetFileName(_open.Clip.Path);
++        bool whole = Timeline.Start <= 0.01 && Timeline.End >= Timeline.Duration - 0.05;
++        double from = whole ? 0 : Timeline.Start, to = whole ? 0 : Timeline.End;
++        bool has = S.Links.TryGetValue(key, out var l) && !l.Expired && !l.Unshared && Math.Abs(l.From - from) < 0.05 && Math.Abs(l.To - to) < 0.05;
++        LinkText.Text = !has ? Loc.T("Share link")
++            : _uploading.TryGetValue(key, out var p) ? Loc.F("Copy link ({0:0%} uploaded)", p)
++            : Loc.T("Copy link");
++    }
++
+     async void Discord_Click(object sender, RoutedEventArgs e)
+     {
+         if (_open == null) return;
+diff --git a/tests/PulseOptimizer.Tests/ClipsTests.cs b/tests/PulseOptimizer.Tests/ClipsTests.cs
+index 73ceebf..562317c 100644
+--- a/tests/PulseOptimizer.Tests/ClipsTests.cs
++++ b/tests/PulseOptimizer.Tests/ClipsTests.cs
+@@ -214,6 +214,28 @@ public class ClipsTests
+         Assert.Contains("ddagrab", ReplayRecorder.Arguments(new ClipSettings(), Nvenc, null, null));
+     }
+ 
++    [Fact]
++    public void Window_capture_asks_for_twice_the_frame_rate_so_no_frame_repeats()
++    {
++        Assert.Contains("max_framerate=120:", ReplayRecorder.Arguments(new ClipSettings { Fps = 60 }, Nvenc, null, null, (IntPtr)0x1234));
++        Assert.Contains("[0:v]fps=60,", ReplayRecorder.Arguments(new ClipSettings { Fps = 60 }, Nvenc, null, null, (IntPtr)0x1234));
++        Assert.Contains("max_framerate=480:", ReplayRecorder.Arguments(new ClipSettings { Fps = 240 }, Nvenc, null, null, (IntPtr)0x1234));
++    }
++
++    [Fact]
++    public void Black_bars_are_not_stretched()
++    {
++        Assert.True(DisplayScaling.Stretches(DisplayScaling.Stretched, null));
++        Assert.True(DisplayScaling.Stretches(null, false));               // unknown: as before
++        Assert.True(DisplayScaling.Stretches(DisplayScaling.Preferred, false));
++        Assert.False(DisplayScaling.Stretches(DisplayScaling.AspectRatio, null)); // driver keeps the shape: bars
++        Assert.False(DisplayScaling.Stretches(DisplayScaling.Centered, null));
++        Assert.False(DisplayScaling.Stretches(DisplayScaling.Stretched, true)); // VALORANT draws its own bars
++        Assert.True(DisplayScaling.Letterbox("[/Script/ShooterGame.ShooterGameUserSettings]\r\nbShouldLetterbox=True\r\nbLastConfirmedShouldLetterbox=True"));
++        Assert.False(DisplayScaling.Letterbox("bShouldLetterbox=False\nResolutionSizeX=1440"));
++        Assert.Null(DisplayScaling.Letterbox("ResolutionSizeX=1920"));
++    }
++
+     [Fact]
+     public void Encoders_use_quality_settings_and_step_down_for_very_high_pixel_rates()
+     {
+-- 
+2.43.0
+
+
+From 50f324c8a84b275ccf7060f6ecf880541bb62cb0 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 26 Nov 2026 23:45:57 -0500
+Subject: [PATCH 2/2] Website moved to pulseoptimizer-app.github.io
+
+The PC guide's live data is read from there now. The old address redirects and keeps
+serving guide.json, so older versions keep working.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_012ggSmWjhyZchpR6anAiJkR
+---
+ README.md                          | 2 +-
+ ROADMAP.md                         | 2 +-
+ src/PulseOptimizer/Core/AppInfo.cs | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/README.md b/README.md
+index 1162992..6306cf1 100644
+--- a/README.md
++++ b/README.md
+@@ -2,7 +2,7 @@
+ 
+ Pulse is an open-source, evidence-based Windows optimizer. It finds what's actually holding a PC back first, only offers tweaks that Microsoft documents and that fit that PC, measures whether they help in your own game, and can undo every change exactly.
+ 
+-**Official download:** this repository's [Releases](../../releases) page, or the website [haisakie.github.io/pulse-web](https://haisakie.github.io/pulse-web/), which links to it.
++**Official download:** this repository's [Releases](../../releases) page, or the website [pulseoptimizer-app.github.io](https://pulseoptimizer-app.github.io/), which links to it.
+ 
+ > **Pulse moved.** Pulse's earlier homes, `PulseOptimizerApp/Pulse` and `PulseOptimizer-app/PulseOptimizer`, are on hold. This is Pulse's home now. Older versions look for updates at the old addresses, so download the latest version once from here; from then on Pulse updates itself from here. Pulse never asks you to turn off your antivirus or add an exclusion. If a copy does, it's fake.
+ 
+diff --git a/ROADMAP.md b/ROADMAP.md
+index 67ee62e..c53651f 100644
+--- a/ROADMAP.md
++++ b/ROADMAP.md
+@@ -4,7 +4,7 @@ Paste everything below the line into a new Claude session to pick the work back
+ 
+ ---
+ 
+-You're continuing work on **Pulse Optimizer**, a free, open-source (MIT) Windows PC optimizer for gamers, with a large Roblox audience. The repository is `haisakie/pulse` on GitHub (it moved from `PulseOptimizer-app/PulseOptimizer`, which was suspended; Core/AppInfo.cs lists both). The website is `haisakie/pulse-web`, and its download buttons always point to the latest GitHub release. The latest release is **v0.3.0** (see Status below).
++You're continuing work on **Pulse Optimizer**, a free, open-source (MIT) Windows PC optimizer for gamers, with a large Roblox audience. The repository is `haisakie/pulse` on GitHub (it moved from `PulseOptimizer-app/PulseOptimizer`, which was suspended; Core/AppInfo.cs lists both). The website is `PulseOptimizer-app/pulseoptimizer-app.github.io` (https://pulseoptimizer-app.github.io/; the old `haisakie/pulse-web` address redirects there and still serves guide/guide.json for older versions), and its download buttons always point to the latest GitHub release. The latest release is **v0.3.0** (see Status below).
+ 
+ ## How the project works (read before changing anything)
+ 
+diff --git a/src/PulseOptimizer/Core/AppInfo.cs b/src/PulseOptimizer/Core/AppInfo.cs
+index eaf86b8..c381c43 100644
+--- a/src/PulseOptimizer/Core/AppInfo.cs
++++ b/src/PulseOptimizer/Core/AppInfo.cs
+@@ -13,7 +13,7 @@ public static class AppInfo
+     /// <summary>Every place Pulse may download its own releases from, newest home first.</summary>
+     public static readonly string[] Repos = { Repo, PreviousRepo, OldRepo };
+ 
+-    public const string Website = "https://haisakie.github.io/pulse-web/";
++    public const string Website = "https://pulseoptimizer-app.github.io/";
+ 
+     /// <summary>Pulse's clip server (server/clip-links): keeps shared clips for 7 days and gives each a page Discord shows as a player.</summary>
+     public const string ClipLinks = "https://pulse-clips.pulseclips.workers.dev";
+-- 
+2.43.0
+
