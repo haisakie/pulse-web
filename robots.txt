@@ -1,5 +1,2 @@
 User-agent: *
-Allow: /
-Disallow: /stats.html
-
-Sitemap: https://haisakie.github.io/pulse-web/sitemap.xml
+Disallow: /
